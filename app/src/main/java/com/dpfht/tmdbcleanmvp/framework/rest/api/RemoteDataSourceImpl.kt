@@ -12,7 +12,6 @@ import com.dpfht.tmdbcleanmvp.core.domain.model.ModelResultWrapper.ErrorResult
 import com.dpfht.tmdbcleanmvp.framework.rest.api.ResultWrapper.GenericError
 import com.dpfht.tmdbcleanmvp.framework.rest.api.ResultWrapper.NetworkError
 import com.dpfht.tmdbcleanmvp.framework.rest.api.ResultWrapper.Success
-import com.dpfht.tmdbcleanmvp.util.safeApiCall
 import kotlinx.coroutines.Dispatchers
 
 class RemoteDataSourceImpl(private val restService: RestService): AppDataSource {

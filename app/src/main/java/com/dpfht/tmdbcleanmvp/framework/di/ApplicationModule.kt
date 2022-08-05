@@ -4,7 +4,7 @@ import android.content.Context
 import com.dpfht.tmdbcleanmvp.TheApplication
 import com.dpfht.tmdbcleanmvp.core.data.repository.AppDataSource
 import com.dpfht.tmdbcleanmvp.core.data.repository.AppRepository
-import com.dpfht.tmdbcleanmvp.core.data.repository.AppRepositoryImpl
+import com.dpfht.tmdbcleanmvp.framework.rest.api.AppRepositoryImpl
 import com.dpfht.tmdbcleanmvp.framework.rest.api.RemoteDataSourceImpl
 import com.dpfht.tmdbcleanmvp.framework.rest.api.RestService
 import dagger.Module

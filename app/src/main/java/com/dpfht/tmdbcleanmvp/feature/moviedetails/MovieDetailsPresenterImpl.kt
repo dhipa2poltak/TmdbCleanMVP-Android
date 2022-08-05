@@ -1,6 +1,7 @@
 package com.dpfht.tmdbcleanmvp.feature.moviedetails
 
 import androidx.navigation.NavDirections
+import com.dpfht.tmdbcleanmvp.BuildConfig
 import com.dpfht.tmdbcleanmvp.Config
 import com.dpfht.tmdbcleanmvp.core.domain.model.ModelResultWrapper.ErrorResult
 import com.dpfht.tmdbcleanmvp.core.domain.model.ModelResultWrapper.Success
@@ -59,7 +60,7 @@ class MovieDetailsPresenterImpl(
   private fun onSuccess(pMovieId: Int, pTitle: String, pOverview: String, pPosterPath: String) {
     imageUrl = ""
     if (pPosterPath.isNotEmpty()) {
-      imageUrl = Config.IMAGE_URL_BASE_PATH + pPosterPath
+      imageUrl = BuildConfig.IMAGE_URL_BASE_PATH + pPosterPath
     }
 
     _movieId = pMovieId

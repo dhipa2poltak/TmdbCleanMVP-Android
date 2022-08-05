@@ -1,5 +1,6 @@
 package com.dpfht.tmdbcleanmvp.core.data.model.remote.response
 
+import androidx.annotation.Keep
 import com.dpfht.tmdbcleanmvp.core.data.model.remote.Genre
 import com.dpfht.tmdbcleanmvp.core.data.model.remote.ProductionCompany
 import com.dpfht.tmdbcleanmvp.core.data.model.remote.ProductionCountry
@@ -8,6 +9,7 @@ import com.dpfht.tmdbcleanmvp.core.domain.model.GetMovieDetailsResult
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
+@Keep
 @Suppress("unused")
 data class MovieDetailsResponse(
 

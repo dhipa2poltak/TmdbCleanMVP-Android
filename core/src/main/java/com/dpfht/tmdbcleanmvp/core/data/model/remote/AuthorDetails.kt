@@ -1,8 +1,10 @@
 package com.dpfht.tmdbcleanmvp.core.data.model.remote
 
+import androidx.annotation.Keep
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
+@Keep
 @Suppress("unused")
 data class AuthorDetails(
     val name: String? = null,

@@ -1,6 +1,7 @@
 package com.dpfht.tmdbcleanmvp.presenter
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.dpfht.tmdbcleanmvp.BuildConfig
 import com.dpfht.tmdbcleanmvp.Config
 import com.dpfht.tmdbcleanmvp.MainCoroutineRule
 import com.dpfht.tmdbcleanmvp.core.domain.model.GetMovieDetailsResult
@@ -65,7 +66,7 @@ class MovieDetailsPresenterUnitTest {
 
     var imageUrl = ""
     if (posterPath.isNotEmpty()) {
-      imageUrl = Config.IMAGE_URL_BASE_PATH + posterPath
+      imageUrl = BuildConfig.IMAGE_URL_BASE_PATH + posterPath
     }
 
     verify(movieDetailsView).showMovieDetails(title, overview, imageUrl)

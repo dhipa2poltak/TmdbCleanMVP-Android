@@ -1,6 +1,6 @@
 # TmdbCleanMVP-Android
 
-**Technology Stack**
+**Technology Stack:**
 - Kotlin Programming Language
 - MVP Architecture Pattern
 - Coroutine

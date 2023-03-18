@@ -1,10 +1,9 @@
 package com.dpfht.tmdbcleanmvp.framework.di
 
 import com.dpfht.tmdbcleanmvp.BuildConfig
-import com.dpfht.tmdbcleanmvp.Config
-import com.dpfht.tmdbcleanmvp.framework.rest.api.AuthInterceptor
-import com.dpfht.tmdbcleanmvp.framework.rest.api.RestService
-import com.dpfht.tmdbcleanmvp.framework.rest.api.UnsafeOkHttpClient
+import com.dpfht.tmdbcleanmvp.framework.rest.AuthInterceptor
+import com.dpfht.tmdbcleanmvp.framework.rest.RestService
+import com.dpfht.tmdbcleanmvp.framework.rest.UnsafeOkHttpClient
 import dagger.Module
 import dagger.Provides
 import okhttp3.CertificatePinner

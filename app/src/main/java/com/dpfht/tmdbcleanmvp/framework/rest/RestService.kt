@@ -1,4 +1,4 @@
-package com.dpfht.tmdbcleanmvp.framework.rest.api
+package com.dpfht.tmdbcleanmvp.framework.rest
 
 import com.dpfht.tmdbcleanmvp.core.data.model.remote.response.DiscoverMovieByGenreResponse
 import com.dpfht.tmdbcleanmvp.core.data.model.remote.response.GenreResponse

@@ -1,4 +1,4 @@
-package com.dpfht.tmdbcleanmvp.framework.rest.api
+package com.dpfht.tmdbcleanmvp.framework
 
 import com.dpfht.tmdbcleanmvp.core.data.model.remote.response.toDomain
 import com.dpfht.tmdbcleanmvp.core.data.repository.AppDataSource
@@ -9,9 +9,11 @@ import com.dpfht.tmdbcleanmvp.core.domain.model.GetMovieReviewResult
 import com.dpfht.tmdbcleanmvp.core.domain.model.GetMovieTrailerResult
 import com.dpfht.tmdbcleanmvp.core.domain.model.ModelResultWrapper
 import com.dpfht.tmdbcleanmvp.core.domain.model.ModelResultWrapper.ErrorResult
-import com.dpfht.tmdbcleanmvp.framework.rest.api.ResultWrapper.GenericError
-import com.dpfht.tmdbcleanmvp.framework.rest.api.ResultWrapper.NetworkError
-import com.dpfht.tmdbcleanmvp.framework.rest.api.ResultWrapper.Success
+import com.dpfht.tmdbcleanmvp.framework.rest.RestService
+import com.dpfht.tmdbcleanmvp.framework.rest.ResultWrapper.GenericError
+import com.dpfht.tmdbcleanmvp.framework.rest.ResultWrapper.NetworkError
+import com.dpfht.tmdbcleanmvp.framework.rest.ResultWrapper.Success
+import com.dpfht.tmdbcleanmvp.framework.rest.api.safeApiCall
 import kotlinx.coroutines.Dispatchers
 
 class RemoteDataSourceImpl(private val restService: RestService): AppDataSource {

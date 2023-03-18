@@ -3,10 +3,10 @@ package com.dpfht.tmdbcleanmvp.framework.di
 import android.content.Context
 import com.dpfht.tmdbcleanmvp.TheApplication
 import com.dpfht.tmdbcleanmvp.core.data.repository.AppDataSource
-import com.dpfht.tmdbcleanmvp.core.data.repository.AppRepository
-import com.dpfht.tmdbcleanmvp.framework.rest.api.AppRepositoryImpl
-import com.dpfht.tmdbcleanmvp.framework.rest.api.RemoteDataSourceImpl
-import com.dpfht.tmdbcleanmvp.framework.rest.api.RestService
+import com.dpfht.tmdbcleanmvp.core.domain.repository.AppRepository
+import com.dpfht.tmdbcleanmvp.core.data.repository.AppRepositoryImpl
+import com.dpfht.tmdbcleanmvp.framework.RemoteDataSourceImpl
+import com.dpfht.tmdbcleanmvp.framework.rest.RestService
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton

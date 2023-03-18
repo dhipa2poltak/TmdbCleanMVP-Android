@@ -1,4 +1,4 @@
-package com.dpfht.tmdbcleanmvp.framework.rest.api
+package com.dpfht.tmdbcleanmvp.framework.rest
 
 import com.dpfht.tmdbcleanmvp.Config
 import okhttp3.Interceptor

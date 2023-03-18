@@ -1,4 +1,4 @@
-package com.dpfht.tmdbcleanmvp.framework.rest.api
+package com.dpfht.tmdbcleanmvp.framework.rest
 
 sealed class ResultWrapper<out T> {
   data class Success<out T>(val value: T): ResultWrapper<T>()

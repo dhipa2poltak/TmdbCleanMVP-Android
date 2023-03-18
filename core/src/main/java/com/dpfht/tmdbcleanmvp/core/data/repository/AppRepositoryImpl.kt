@@ -1,7 +1,7 @@
-package com.dpfht.tmdbcleanmvp.framework.rest.api
+package com.dpfht.tmdbcleanmvp.core.data.repository
 
 import com.dpfht.tmdbcleanmvp.core.data.repository.AppDataSource
-import com.dpfht.tmdbcleanmvp.core.data.repository.AppRepository
+import com.dpfht.tmdbcleanmvp.core.domain.repository.AppRepository
 import com.dpfht.tmdbcleanmvp.core.domain.model.GetMovieByGenreResult
 import com.dpfht.tmdbcleanmvp.core.domain.model.GetMovieDetailsResult
 import com.dpfht.tmdbcleanmvp.core.domain.model.GetMovieGenreResult

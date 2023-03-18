@@ -1,6 +1,6 @@
 package com.dpfht.tmdbcleanmvp.framework.di
 
-import com.dpfht.tmdbcleanmvp.core.data.repository.AppRepository
+import com.dpfht.tmdbcleanmvp.core.domain.repository.AppRepository
 import dagger.Component
 import javax.inject.Singleton
 

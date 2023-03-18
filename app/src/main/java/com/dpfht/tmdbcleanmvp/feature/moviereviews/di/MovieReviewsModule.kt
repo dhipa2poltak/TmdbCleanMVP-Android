@@ -13,7 +13,7 @@ import com.dpfht.tmdbcleanmvp.feature.moviereviews.MovieReviewsFragment
 import com.dpfht.tmdbcleanmvp.feature.moviereviews.MovieReviewsModelImpl
 import com.dpfht.tmdbcleanmvp.feature.moviereviews.MovieReviewsPresenterImpl
 import com.dpfht.tmdbcleanmvp.feature.moviereviews.adapter.MovieReviewsAdapter
-import com.dpfht.tmdbcleanmvp.core.data.repository.AppRepository
+import com.dpfht.tmdbcleanmvp.core.domain.repository.AppRepository
 import dagger.Module
 import dagger.Provides
 import kotlinx.coroutines.CoroutineScope

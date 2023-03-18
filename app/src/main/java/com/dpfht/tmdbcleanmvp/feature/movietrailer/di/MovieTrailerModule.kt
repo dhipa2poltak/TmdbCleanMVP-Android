@@ -1,6 +1,6 @@
 package com.dpfht.tmdbcleanmvp.feature.movietrailer.di
 
-import com.dpfht.tmdbcleanmvp.core.data.repository.AppRepository
+import com.dpfht.tmdbcleanmvp.core.domain.repository.AppRepository
 import com.dpfht.tmdbcleanmvp.framework.di.ActivityScope
 import com.dpfht.tmdbcleanmvp.feature.movietrailer.MovieTrailerActivity
 import com.dpfht.tmdbcleanmvp.feature.movietrailer.MovieTrailerContract.MovieTrailerModel

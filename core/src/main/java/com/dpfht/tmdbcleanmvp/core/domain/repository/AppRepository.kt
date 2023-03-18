@@ -1,4 +1,4 @@
-package com.dpfht.tmdbcleanmvp.core.data.repository
+package com.dpfht.tmdbcleanmvp.core.domain.repository
 
 import com.dpfht.tmdbcleanmvp.core.domain.model.GetMovieByGenreResult
 import com.dpfht.tmdbcleanmvp.core.domain.model.GetMovieDetailsResult

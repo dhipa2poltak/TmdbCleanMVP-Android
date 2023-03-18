@@ -13,7 +13,7 @@ import com.dpfht.tmdbcleanmvp.feature.moviesbygenre.MoviesByGenreFragment
 import com.dpfht.tmdbcleanmvp.feature.moviesbygenre.MoviesByGenreModelImpl
 import com.dpfht.tmdbcleanmvp.feature.moviesbygenre.MoviesByGenrePresenterImpl
 import com.dpfht.tmdbcleanmvp.feature.moviesbygenre.adapter.MoviesByGenreAdapter
-import com.dpfht.tmdbcleanmvp.core.data.repository.AppRepository
+import com.dpfht.tmdbcleanmvp.core.domain.repository.AppRepository
 import dagger.Module
 import dagger.Provides
 import kotlinx.coroutines.CoroutineScope

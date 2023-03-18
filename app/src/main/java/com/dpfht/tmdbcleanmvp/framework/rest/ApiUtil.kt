@@ -1,5 +1,7 @@
 package com.dpfht.tmdbcleanmvp.framework.rest.api
 
+import com.dpfht.tmdbcleanmvp.framework.rest.ResultWrapper
+import com.dpfht.tmdbcleanmvp.framework.rest.ErrorResponse
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.CoroutineDispatcher

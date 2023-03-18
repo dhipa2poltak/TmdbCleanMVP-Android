@@ -11,7 +11,7 @@ import com.dpfht.tmdbcleanmvp.feature.moviedetails.MovieDetailsContract.MovieDet
 import com.dpfht.tmdbcleanmvp.feature.moviedetails.MovieDetailsFragment
 import com.dpfht.tmdbcleanmvp.feature.moviedetails.MovieDetailsModelImpl
 import com.dpfht.tmdbcleanmvp.feature.moviedetails.MovieDetailsPresenterImpl
-import com.dpfht.tmdbcleanmvp.core.data.repository.AppRepository
+import com.dpfht.tmdbcleanmvp.core.domain.repository.AppRepository
 import dagger.Module
 import dagger.Provides
 import kotlinx.coroutines.CoroutineScope

@@ -13,7 +13,7 @@ import com.dpfht.tmdbcleanmvp.feature.genre.GenreFragment
 import com.dpfht.tmdbcleanmvp.feature.genre.GenreModelImpl
 import com.dpfht.tmdbcleanmvp.feature.genre.GenrePresenterImpl
 import com.dpfht.tmdbcleanmvp.feature.genre.adapter.GenreAdapter
-import com.dpfht.tmdbcleanmvp.core.domain.repository.AppRepository
+import com.dpfht.tmdbcleanmvp.core.data.repository.AppRepository
 import dagger.Module
 import dagger.Provides
 import kotlinx.coroutines.CoroutineScope

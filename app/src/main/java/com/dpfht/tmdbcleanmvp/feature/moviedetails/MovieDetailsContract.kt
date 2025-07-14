@@ -3,8 +3,8 @@ package com.dpfht.tmdbcleanmvp.feature.moviedetails
 import androidx.navigation.NavDirections
 import com.dpfht.tmdbcleanmvp.feature.base.BasePresenter
 import com.dpfht.tmdbcleanmvp.feature.base.BaseView
-import com.dpfht.tmdbcleanmvp.core.domain.model.GetMovieDetailsResult
-import com.dpfht.tmdbcleanmvp.core.domain.model.ModelResultWrapper
+import com.dpfht.tmdbcleanmvp.domain.entity.MovieDetailsDomain
+import com.dpfht.tmdbcleanmvp.domain.entity.Result
 
 interface MovieDetailsContract {
 
@@ -15,10 +15,13 @@ interface MovieDetailsContract {
   interface MovieDetailsPresenter: BasePresenter {
     fun setMovieId(movieId: Int)
     fun getMovieId(): Int
-    fun getNavDirectionsToMovieReviews(): NavDirections
+
+    fun getMovieTitle(): String
+    fun navigateToMovieReviews(movieId: Int, movieTitle: String)
+    fun navigateToMovieTrailer(movieId: Int)
   }
 
   interface MovieDetailsModel {
-    suspend fun getMovieDetails(movieId: Int): ModelResultWrapper<GetMovieDetailsResult>
+    suspend fun getMovieDetails(movieId: Int): Result<MovieDetailsDomain>
   }
 }

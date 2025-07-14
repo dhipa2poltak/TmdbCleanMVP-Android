@@ -2,9 +2,12 @@ package com.dpfht.tmdbcleanmvp.feature.genre.di
 
 import android.content.Context
 import androidx.lifecycle.lifecycleScope
-import com.dpfht.tmdbcleanmvp.core.data.model.remote.Genre
+import com.dpfht.tmdbcleanmvp.domain.entity.GenreEntity
+import com.dpfht.tmdbcleanmvp.domain.repository.AppRepository
+import com.dpfht.tmdbcleanmvp.domain.usecase.GetMovieGenreUseCase
+import com.dpfht.tmdbcleanmvp.domain.usecase.GetMovieGenreUseCaseImpl
 import com.dpfht.tmdbcleanmvp.framework.di.ActivityContext
-import com.dpfht.tmdbcleanmvp.framework.di.FragmentModule
+import com.dpfht.tmdbcleanmvp.framework.di.module.FragmentModule
 import com.dpfht.tmdbcleanmvp.framework.di.FragmentScope
 import com.dpfht.tmdbcleanmvp.feature.genre.GenreContract.GenreModel
 import com.dpfht.tmdbcleanmvp.feature.genre.GenreContract.GenrePresenter
@@ -13,7 +16,7 @@ import com.dpfht.tmdbcleanmvp.feature.genre.GenreFragment
 import com.dpfht.tmdbcleanmvp.feature.genre.GenreModelImpl
 import com.dpfht.tmdbcleanmvp.feature.genre.GenrePresenterImpl
 import com.dpfht.tmdbcleanmvp.feature.genre.adapter.GenreAdapter
-import com.dpfht.tmdbcleanmvp.core.data.repository.AppRepository
+import com.dpfht.tmdbcleanmvp.framework.navigation.NavigationService
 import dagger.Module
 import dagger.Provides
 import kotlinx.coroutines.CoroutineScope
@@ -42,13 +45,19 @@ class GenreModule(private val genreFragment: GenreFragment) {
 
   @Provides
   @FragmentScope
-  fun provideGenreModel(appRepository: AppRepository): GenreModel {
-    return GenreModelImpl(appRepository)
+  fun provideGetMovieGenreUseCase(appRepository: AppRepository): GetMovieGenreUseCase {
+    return GetMovieGenreUseCaseImpl(appRepository)
   }
 
   @Provides
   @FragmentScope
-  fun provideGenres(): ArrayList<Genre> {
+  fun provideGenreModel(getMovieGenreUseCase: GetMovieGenreUseCase): GenreModel {
+    return GenreModelImpl(getMovieGenreUseCase)
+  }
+
+  @Provides
+  @FragmentScope
+  fun provideGenres(): ArrayList<GenreEntity> {
     return arrayListOf()
   }
 
@@ -57,15 +66,16 @@ class GenreModule(private val genreFragment: GenreFragment) {
   fun provideGenrePresenter(
     genreView: GenreView,
     genreModel: GenreModel,
-    genres: ArrayList<Genre>,
-    scope: CoroutineScope
+    genres: ArrayList<GenreEntity>,
+    scope: CoroutineScope,
+    navigationService: NavigationService
   ): GenrePresenter {
-    return GenrePresenterImpl(genreView, genreModel, genres, scope)
+    return GenrePresenterImpl(genreView, genreModel, genres, scope, navigationService)
   }
 
   @Provides
   @FragmentScope
-  fun provideGenreAdapter(genres: ArrayList<Genre>): GenreAdapter {
+  fun provideGenreAdapter(genres: ArrayList<GenreEntity>): GenreAdapter {
     return GenreAdapter(genres)
   }
 }

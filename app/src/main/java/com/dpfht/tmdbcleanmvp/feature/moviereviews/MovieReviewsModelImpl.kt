@@ -1,15 +1,15 @@
 package com.dpfht.tmdbcleanmvp.feature.moviereviews
 
-import com.dpfht.tmdbcleanmvp.core.data.repository.AppRepository
-import com.dpfht.tmdbcleanmvp.core.domain.model.GetMovieReviewResult
-import com.dpfht.tmdbcleanmvp.core.domain.model.ModelResultWrapper
+import com.dpfht.tmdbcleanmvp.domain.entity.Result
+import com.dpfht.tmdbcleanmvp.domain.entity.ReviewDomain
+import com.dpfht.tmdbcleanmvp.domain.usecase.GetMovieReviewUseCase
 import com.dpfht.tmdbcleanmvp.feature.moviereviews.MovieReviewsContract.MovieReviewsModel
 
 class MovieReviewsModelImpl(
-  private val appRepository: AppRepository
+  private val getMovieReviewUseCase: GetMovieReviewUseCase
 ): MovieReviewsModel {
 
-  override suspend fun getMovieReviews(movieId: Int, page: Int): ModelResultWrapper<GetMovieReviewResult> {
-    return appRepository.getMovieReviews(movieId, page)
+  override suspend fun getMovieReviews(movieId: Int, page: Int): Result<ReviewDomain> {
+    return getMovieReviewUseCase(movieId, page)
   }
 }

@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dpfht.tmdbcleanmvp.R
 import com.dpfht.tmdbcleanmvp.TheApplication
@@ -16,6 +15,7 @@ import com.dpfht.tmdbcleanmvp.feature.genre.GenreContract.GenreView
 import com.dpfht.tmdbcleanmvp.feature.genre.adapter.GenreAdapter
 import com.dpfht.tmdbcleanmvp.feature.genre.di.DaggerGenreComponent
 import com.dpfht.tmdbcleanmvp.feature.genre.di.GenreModule
+import com.dpfht.tmdbcleanmvp.framework.di.provider.NavigationComponentProvider
 import javax.inject.Inject
 
 class GenreFragment : BaseFragment(), GenreView {
@@ -34,6 +34,7 @@ class GenreFragment : BaseFragment(), GenreView {
     val genreComponent = DaggerGenreComponent
       .builder()
       .genreModule(GenreModule(this))
+      .navigationComponent((requireActivity() as NavigationComponentProvider).provideNavigationComponent())
       .applicationComponent(TheApplication.instance.applicationComponent)
       .build()
 
@@ -60,8 +61,7 @@ class GenreFragment : BaseFragment(), GenreView {
 
     adapter.onClickGenreListener = object : GenreAdapter.OnClickGenreListener {
       override fun onClickGenre(position: Int) {
-        val navDirections = presenter.getNavDirectionsOnClickGenreAt(position)
-        Navigation.findNavController(requireView()).navigate(navDirections)
+        presenter.navigateToMovieByGenre(position)
       }
     }
 
@@ -86,8 +86,8 @@ class GenreFragment : BaseFragment(), GenreView {
   }
 
   override fun showErrorMessage(message: String) {
-    val navDirections = GenreFragmentDirections.actionGenreFragmentToErrorDialog(message)
-    Navigation.findNavController(requireView()).navigate(navDirections)
+    //val navDirections = GenreFragmentDirections.actionGenreFragmentToErrorDialog(message)
+    //Navigation.findNavController(requireView()).navigate(navDirections)
   }
 
   override fun showCanceledMessage() {

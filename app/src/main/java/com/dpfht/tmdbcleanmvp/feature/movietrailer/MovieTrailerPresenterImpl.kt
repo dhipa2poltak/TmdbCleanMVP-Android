@@ -1,11 +1,11 @@
 package com.dpfht.tmdbcleanmvp.feature.movietrailer
 
+import com.dpfht.tmdbcleanmvp.domain.entity.Result.Success
+import com.dpfht.tmdbcleanmvp.domain.entity.Result.Error
+import com.dpfht.tmdbcleanmvp.domain.entity.TrailerEntity
 import com.dpfht.tmdbcleanmvp.feature.movietrailer.MovieTrailerContract.MovieTrailerModel
 import com.dpfht.tmdbcleanmvp.feature.movietrailer.MovieTrailerContract.MovieTrailerPresenter
 import com.dpfht.tmdbcleanmvp.feature.movietrailer.MovieTrailerContract.MovieTrailerView
-import com.dpfht.tmdbcleanmvp.core.data.model.remote.Trailer
-import com.dpfht.tmdbcleanmvp.core.domain.model.ModelResultWrapper.ErrorResult
-import com.dpfht.tmdbcleanmvp.core.domain.model.ModelResultWrapper.Success
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
@@ -36,9 +36,9 @@ class MovieTrailerPresenterImpl(
       movieTrailerModel?.let {
         when (val result = it.getMovieTrailer(_movieId)) {
           is Success -> {
-            onSuccess(result.value.trailers)
+            onSuccess(result.value.results)
           }
-          is ErrorResult -> {
+          is Error -> {
             onError(result.message)
           }
         }
@@ -46,13 +46,11 @@ class MovieTrailerPresenterImpl(
     }
   }
 
-  private fun onSuccess(trailers: List<Trailer>) {
+  private fun onSuccess(trailers: List<TrailerEntity>) {
     var keyVideo = ""
     for (trailer in trailers) {
-      if (trailer.site?.lowercase(Locale.ROOT)
-          ?.trim() == "youtube"
-      ) {
-        keyVideo = trailer.key ?: ""
+      if (trailer.site.lowercase(Locale.ROOT).trim() == "youtube") {
+        keyVideo = trailer.key
         break
       }
     }

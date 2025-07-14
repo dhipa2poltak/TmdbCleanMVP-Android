@@ -1,12 +1,12 @@
 package com.dpfht.tmdbcleanmvp.feature.genre
 
-import androidx.navigation.NavDirections
+import com.dpfht.tmdbcleanmvp.domain.entity.GenreEntity
+import com.dpfht.tmdbcleanmvp.domain.entity.Result.Error
+import com.dpfht.tmdbcleanmvp.domain.entity.Result.Success
 import com.dpfht.tmdbcleanmvp.feature.genre.GenreContract.GenreModel
 import com.dpfht.tmdbcleanmvp.feature.genre.GenreContract.GenrePresenter
 import com.dpfht.tmdbcleanmvp.feature.genre.GenreContract.GenreView
-import com.dpfht.tmdbcleanmvp.core.data.model.remote.Genre
-import com.dpfht.tmdbcleanmvp.core.domain.model.ModelResultWrapper.ErrorResult
-import com.dpfht.tmdbcleanmvp.core.domain.model.ModelResultWrapper.Success
+import com.dpfht.tmdbcleanmvp.framework.navigation.NavigationService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
@@ -16,8 +16,9 @@ import kotlinx.coroutines.launch
 class GenrePresenterImpl(
   private var genreView: GenreView? = null,
   private var genreModel: GenreModel? = null,
-  private val genres: ArrayList<Genre>,
-  private val scope: CoroutineScope
+  private val genres: ArrayList<GenreEntity>,
+  private val scope: CoroutineScope,
+  private val navigationService: NavigationService
 ): GenrePresenter {
 
   override fun start() {
@@ -34,7 +35,7 @@ class GenrePresenterImpl(
           is Success -> {
             onSuccess(result.value.genres)
           }
-          is ErrorResult -> {
+          is Error -> {
             onError(result.message)
           }
         }
@@ -42,7 +43,7 @@ class GenrePresenterImpl(
     }
   }
 
-  private fun onSuccess(genres: List<Genre>) {
+  private fun onSuccess(genres: List<GenreEntity>) {
     for (genre in genres) {
       this.genres.add(genre)
       genreView?.notifyItemInserted(this.genres.size - 1)
@@ -52,15 +53,12 @@ class GenrePresenterImpl(
 
   private fun onError(message: String) {
     genreView?.hideLoadingDialog()
-    genreView?.showErrorMessage(message)
+    navigationService.navigateToErrorMessage(message)
   }
 
-  override fun getNavDirectionsOnClickGenreAt(position: Int): NavDirections {
+  override fun navigateToMovieByGenre(position: Int) {
     val genre = genres[position]
-
-    return GenreFragmentDirections.actionGenreFragmentToMoviesByGenreFragment(
-      genre.id, genre.name ?: ""
-    )
+    navigationService.navigateToMoviesByGender(genre.id, genre.name)
   }
 
   override fun onDestroy() {

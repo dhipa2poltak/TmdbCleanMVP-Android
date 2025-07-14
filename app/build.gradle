@@ -1,8 +1,9 @@
 plugins {
   id 'com.android.application'
-  id 'kotlin-android'
+  //id 'kotlin-android'
+  id 'org.jetbrains.kotlin.android'
   id 'kotlin-kapt'
-  id 'androidx.navigation.safeargs.kotlin'
+  //id 'androidx.navigation.safeargs.kotlin'
 }
 
 android {
@@ -15,12 +16,14 @@ android {
     }
   }
 
-  compileSdk 33
+  namespace = "com.dpfht.tmdbcleanmvp"
+  compileSdk ConfigData.compileSdkVersion
 
   defaultConfig {
     applicationId "com.dpfht.tmdbcleanmvp"
-    minSdk 16
-    targetSdk 33
+
+    minSdk ConfigData.minSdkVersion
+    targetSdk ConfigData.targetSdkVersion
     versionCode 1
     versionName "1.0"
 
@@ -46,14 +49,16 @@ android {
     }
   }
   buildFeatures {
+    buildConfig true
     viewBinding true
+    dataBinding true
   }
   compileOptions {
-    sourceCompatibility JavaVersion.VERSION_1_8
-    targetCompatibility JavaVersion.VERSION_1_8
+    sourceCompatibility ConfigData.sourceCompatibilityVersion
+    targetCompatibility ConfigData.targetCompatibilityVersion
   }
   kotlinOptions {
-    jvmTarget = '1.8'
+    jvmTarget = ConfigData.jvmTargetVersion
   }
 
   flavorDimensions "default"
@@ -86,7 +91,9 @@ android {
 dependencies {
 
   implementation fileTree(dir: "libs", include: ["*.jar"])
-  implementation project(':core')
+  //implementation project(':core')
+  implementation project(':framework')
+  implementation project(':domain')
 
   implementation 'androidx.core:core-ktx:1.9.0'
   implementation 'androidx.appcompat:appcompat:1.6.1'
@@ -105,8 +112,8 @@ dependencies {
   implementation 'com.squareup.okhttp3:logging-interceptor:4.9.1'
   implementation 'com.squareup.okhttp3:okhttp:4.9.3'
 
-  implementation 'com.google.dagger:dagger:2.42'
-  kapt 'com.google.dagger:dagger-compiler:2.42'
+  implementation 'com.google.dagger:dagger:2.50'
+  kapt 'com.google.dagger:dagger-compiler:2.50'
 
   implementation 'com.github.bumptech.glide:glide:4.12.0'
   kapt 'com.github.bumptech.glide:compiler:4.12.0'

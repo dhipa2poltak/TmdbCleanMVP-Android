@@ -1,10 +1,10 @@
 package com.dpfht.tmdbcleanmvp.feature.genre
 
 import androidx.navigation.NavDirections
+import com.dpfht.tmdbcleanmvp.domain.entity.GenreDomain
+import com.dpfht.tmdbcleanmvp.domain.entity.Result
 import com.dpfht.tmdbcleanmvp.feature.base.BasePresenter
 import com.dpfht.tmdbcleanmvp.feature.base.BaseView
-import com.dpfht.tmdbcleanmvp.core.domain.model.GetMovieGenreResult
-import com.dpfht.tmdbcleanmvp.core.domain.model.ModelResultWrapper
 
 interface GenreContract {
 
@@ -13,10 +13,10 @@ interface GenreContract {
   }
 
   interface GenrePresenter: BasePresenter {
-    fun getNavDirectionsOnClickGenreAt(position: Int): NavDirections
+    fun navigateToMovieByGenre(position: Int)
   }
 
   interface GenreModel {
-    suspend fun getMovieGenre(): ModelResultWrapper<GetMovieGenreResult>
+    suspend fun getMovieGenre(): Result<GenreDomain>
   }
 }

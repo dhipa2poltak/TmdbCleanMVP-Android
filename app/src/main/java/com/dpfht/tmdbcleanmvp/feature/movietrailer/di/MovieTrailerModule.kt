@@ -1,6 +1,8 @@
 package com.dpfht.tmdbcleanmvp.feature.movietrailer.di
 
-import com.dpfht.tmdbcleanmvp.core.data.repository.AppRepository
+import com.dpfht.tmdbcleanmvp.domain.repository.AppRepository
+import com.dpfht.tmdbcleanmvp.domain.usecase.GetMovieTrailerUseCase
+import com.dpfht.tmdbcleanmvp.domain.usecase.GetMovieTrailerUseCaseImpl
 import com.dpfht.tmdbcleanmvp.framework.di.ActivityScope
 import com.dpfht.tmdbcleanmvp.feature.movietrailer.MovieTrailerActivity
 import com.dpfht.tmdbcleanmvp.feature.movietrailer.MovieTrailerContract.MovieTrailerModel
@@ -36,8 +38,14 @@ class MovieTrailerModule(private val movieTrailerActivity: MovieTrailerActivity)
 
   @Provides
   @ActivityScope
-  fun provideMovieTrailerModel(appRepository: AppRepository): MovieTrailerModel {
-    return MovieTrailerModelImpl(appRepository)
+  fun provideGetMovieTrailerUseCase(appRepository: AppRepository): GetMovieTrailerUseCase {
+    return GetMovieTrailerUseCaseImpl(appRepository)
+  }
+
+  @Provides
+  @ActivityScope
+  fun provideMovieTrailerModel(getMovieTrailerUseCase: GetMovieTrailerUseCase): MovieTrailerModel {
+    return MovieTrailerModelImpl(getMovieTrailerUseCase)
   }
 
   @Provides

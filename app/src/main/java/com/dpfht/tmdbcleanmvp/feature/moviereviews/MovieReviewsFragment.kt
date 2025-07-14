@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dpfht.tmdbcleanmvp.R
@@ -17,6 +16,7 @@ import com.dpfht.tmdbcleanmvp.feature.moviereviews.MovieReviewsContract.MovieRev
 import com.dpfht.tmdbcleanmvp.feature.moviereviews.adapter.MovieReviewsAdapter
 import com.dpfht.tmdbcleanmvp.feature.moviereviews.di.DaggerMovieReviewsComponent
 import com.dpfht.tmdbcleanmvp.feature.moviereviews.di.MovieReviewsModule
+import com.dpfht.tmdbcleanmvp.framework.di.provider.NavigationComponentProvider
 import javax.inject.Inject
 
 class MovieReviewsFragment : BaseFragment(), MovieReviewsView {
@@ -35,6 +35,7 @@ class MovieReviewsFragment : BaseFragment(), MovieReviewsView {
     val movieReviewsComponent = DaggerMovieReviewsComponent
       .builder()
       .movieReviewsModule(MovieReviewsModule(this))
+      .navigationComponent((requireActivity() as NavigationComponentProvider).provideNavigationComponent())
       .applicationComponent(TheApplication.instance.applicationComponent)
       .build()
 
@@ -72,14 +73,15 @@ class MovieReviewsFragment : BaseFragment(), MovieReviewsView {
       }
     })
 
-    val args = MovieReviewsFragmentArgs.fromBundle(requireArguments())
-    val movieId = args.movieId
-    val movieTitle = args.movieTitle
+    arguments?.let {
+      val movieId = it.getInt("movieId")
+      val movieTitle = it.getString("movieTitle")
 
-    binding.tvMovieName.text = movieTitle
+      binding.tvMovieName.text = movieTitle
 
-    presenter.setMovieId(movieId)
-    presenter.start()
+      presenter.setMovieId(movieId)
+      presenter.start()
+    }
   }
 
   override fun notifyItemInserted(position: Int) {
@@ -100,8 +102,8 @@ class MovieReviewsFragment : BaseFragment(), MovieReviewsView {
   }
 
   override fun showErrorMessage(message: String) {
-    val navDirections = MovieReviewsFragmentDirections.actionMovieReviewsToErrorDialog(message)
-    Navigation.findNavController(requireView()).navigate(navDirections)
+    //val navDirections = MovieReviewsFragmentDirections.actionMovieReviewsToErrorDialog(message)
+    //Navigation.findNavController(requireView()).navigate(navDirections)
   }
 
   override fun showCanceledMessage() {

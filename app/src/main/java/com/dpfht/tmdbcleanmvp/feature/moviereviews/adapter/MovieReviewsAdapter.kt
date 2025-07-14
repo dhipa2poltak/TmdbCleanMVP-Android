@@ -6,9 +6,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.dpfht.tmdbcleanmvp.R
 import com.dpfht.tmdbcleanmvp.databinding.RowReviewBinding
-import com.dpfht.tmdbcleanmvp.core.data.model.remote.Review
+import com.dpfht.tmdbcleanmvp.domain.entity.ReviewEntity
 
-class MovieReviewsAdapter(private val reviews: ArrayList<Review>): RecyclerView.Adapter<MovieReviewsAdapter.ReviewHolder>() {
+class MovieReviewsAdapter(private val reviews: ArrayList<ReviewEntity>): RecyclerView.Adapter<MovieReviewsAdapter.ReviewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReviewHolder {
         val binding = RowReviewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -26,7 +26,7 @@ class MovieReviewsAdapter(private val reviews: ArrayList<Review>): RecyclerView.
 
     class ReviewHolder(private val binding: RowReviewBinding): RecyclerView.ViewHolder(binding.root) {
 
-        fun bindData(review: Review) {
+        fun bindData(review: ReviewEntity) {
             binding.tvAuthor.text = review.author
             binding.tvContent.text = review.content
 
@@ -34,7 +34,7 @@ class MovieReviewsAdapter(private val reviews: ArrayList<Review>): RecyclerView.
             if (imageUrl?.startsWith("/") == true) {
                 imageUrl = imageUrl.replaceFirst("/", "")
             }
-            if (imageUrl != null && imageUrl.isNotEmpty()) {
+            if (!imageUrl.isNullOrEmpty()) {
                 Glide.with(binding.ivAuthor.context)
                     .load(imageUrl)
                     .placeholder(R.mipmap.ic_launcher)

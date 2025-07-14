@@ -1,0 +1,63 @@
+plugins {
+  id 'com.android.library'
+  id 'org.jetbrains.kotlin.android'
+  id 'kotlin-kapt'
+}
+
+android {
+  namespace 'com.dpfht.tmdbcleanmvp.framework'
+  compileSdk ConfigData.compileSdkVersion
+
+  defaultConfig {
+    minSdk ConfigData.minSdkVersion
+
+    testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    consumerProguardFiles "consumer-rules.pro"
+  }
+
+  buildTypes {
+    release {
+      minifyEnabled true
+      proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+    }
+  }
+  buildFeatures {
+    buildConfig true
+    viewBinding true
+    dataBinding true
+  }
+  compileOptions {
+    sourceCompatibility ConfigData.sourceCompatibilityVersion
+    targetCompatibility ConfigData.targetCompatibilityVersion
+  }
+  kotlinOptions {
+    jvmTarget = ConfigData.jvmTargetVersion
+  }
+}
+
+dependencies {
+
+  implementation project(":domain")
+  implementation project(":data")
+
+  implementation Deps.coreKtx
+  implementation Deps.appCompat
+  implementation Deps.material
+
+  testImplementation Deps.jUnit
+  testImplementation Deps.mockitoKotlin
+  testImplementation Deps.mockitoInline
+  testImplementation Deps.coroutinesTest
+  testImplementation Deps.mockWebServer
+  testImplementation Deps.robolectric
+  androidTestImplementation Deps.jUnitExt
+  androidTestImplementation Deps.espresso
+
+  implementation Deps.gson
+  implementation Deps.retrofitConverterGson
+  implementation Deps.okHttpLoggingInterceptor
+  implementation Deps.okHttp
+
+  implementation 'com.google.dagger:dagger:2.50'
+  kapt 'com.google.dagger:dagger-compiler:2.50'
+}

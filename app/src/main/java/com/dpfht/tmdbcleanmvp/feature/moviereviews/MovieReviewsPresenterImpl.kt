@@ -3,9 +3,10 @@ package com.dpfht.tmdbcleanmvp.feature.moviereviews
 import com.dpfht.tmdbcleanmvp.feature.moviereviews.MovieReviewsContract.MovieReviewsModel
 import com.dpfht.tmdbcleanmvp.feature.moviereviews.MovieReviewsContract.MovieReviewsPresenter
 import com.dpfht.tmdbcleanmvp.feature.moviereviews.MovieReviewsContract.MovieReviewsView
-import com.dpfht.tmdbcleanmvp.core.data.model.remote.Review
-import com.dpfht.tmdbcleanmvp.core.domain.model.ModelResultWrapper.ErrorResult
-import com.dpfht.tmdbcleanmvp.core.domain.model.ModelResultWrapper.Success
+import com.dpfht.tmdbcleanmvp.domain.entity.Result.Success
+import com.dpfht.tmdbcleanmvp.domain.entity.Result.Error
+import com.dpfht.tmdbcleanmvp.domain.entity.ReviewEntity
+import com.dpfht.tmdbcleanmvp.framework.navigation.NavigationService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
@@ -15,8 +16,9 @@ import kotlinx.coroutines.launch
 class MovieReviewsPresenterImpl(
   private var movieReviewsView: MovieReviewsView? = null,
   private var movieReviewsModel: MovieReviewsModel? = null,
-  private val reviews: ArrayList<Review>,
-  private val scope: CoroutineScope
+  private val reviews: ArrayList<ReviewEntity>,
+  private val scope: CoroutineScope,
+  private val navigationService: NavigationService
 ): MovieReviewsPresenter {
 
   private var _isLoadingData = false
@@ -46,9 +48,9 @@ class MovieReviewsPresenterImpl(
       movieReviewsModel?.let {
         when (val result = it.getMovieReviews(_movieId, page + 1)) {
           is Success -> {
-            onSuccess(result.value.reviews, result.value.page)
+            onSuccess(result.value.results, result.value.page)
           }
-          is ErrorResult -> {
+          is Error -> {
             onError(result.message)
           }
         }
@@ -56,7 +58,7 @@ class MovieReviewsPresenterImpl(
     }
   }
 
-  private fun onSuccess(reviews: List<Review>, page: Int) {
+  private fun onSuccess(reviews: List<ReviewEntity>, page: Int) {
     if (reviews.isNotEmpty()) {
       this.page = page
 
@@ -75,7 +77,7 @@ class MovieReviewsPresenterImpl(
   private fun onError(message: String) {
     movieReviewsView?.hideLoadingDialog()
     _isLoadingData = false
-    movieReviewsView?.showErrorMessage(message)
+    navigationService.navigateToErrorMessage(message)
   }
 
   override fun onDestroy() {

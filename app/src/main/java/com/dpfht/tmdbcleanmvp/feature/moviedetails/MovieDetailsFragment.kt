@@ -1,12 +1,10 @@
 package com.dpfht.tmdbcleanmvp.feature.moviedetails
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.Navigation
 import com.bumptech.glide.Glide
 import com.dpfht.tmdbcleanmvp.R
 import com.dpfht.tmdbcleanmvp.TheApplication
@@ -16,7 +14,7 @@ import com.dpfht.tmdbcleanmvp.feature.moviedetails.MovieDetailsContract.MovieDet
 import com.dpfht.tmdbcleanmvp.feature.moviedetails.MovieDetailsContract.MovieDetailsView
 import com.dpfht.tmdbcleanmvp.feature.moviedetails.di.DaggerMovieDetailsComponent
 import com.dpfht.tmdbcleanmvp.feature.moviedetails.di.MovieDetailsModule
-import com.dpfht.tmdbcleanmvp.feature.movietrailer.MovieTrailerActivity
+import com.dpfht.tmdbcleanmvp.framework.di.provider.NavigationComponentProvider
 import javax.inject.Inject
 
 class MovieDetailsFragment : BaseFragment(), MovieDetailsView {
@@ -32,6 +30,7 @@ class MovieDetailsFragment : BaseFragment(), MovieDetailsView {
     val movieDetailsComponent = DaggerMovieDetailsComponent
       .builder()
       .movieDetailsModule(MovieDetailsModule(this))
+      .navigationComponent((requireActivity() as NavigationComponentProvider).provideNavigationComponent())
       .applicationComponent(TheApplication.instance.applicationComponent)
       .build()
 
@@ -58,11 +57,12 @@ class MovieDetailsFragment : BaseFragment(), MovieDetailsView {
       onClickShowTrailer()
     }
 
-    val args = MovieDetailsFragmentArgs.fromBundle(requireArguments())
-    val movieId = args.movieId
+    arguments?.let {
+      val movieId = it.getInt("movieId")
 
-    presenter.setMovieId(movieId)
-    presenter.start()
+      presenter.setMovieId(movieId)
+      presenter.start()
+    }
   }
 
   override fun showMovieDetails(title: String, overview: String, imageUrl: String) {
@@ -78,14 +78,11 @@ class MovieDetailsFragment : BaseFragment(), MovieDetailsView {
   }
 
   private fun onClickShowReview() {
-    val navDirections = presenter.getNavDirectionsToMovieReviews()
-    Navigation.findNavController(requireView()).navigate(navDirections)
+    presenter.navigateToMovieReviews(presenter.getMovieId(), presenter.getMovieTitle())
   }
 
   private fun onClickShowTrailer() {
-    val itn = Intent(requireContext(), MovieTrailerActivity::class.java)
-    itn.putExtra("movie_id", presenter.getMovieId())
-    requireActivity().startActivity(itn)
+    presenter.navigateToMovieTrailer(presenter.getMovieId())
   }
 
   override fun onDetach() {
@@ -102,8 +99,8 @@ class MovieDetailsFragment : BaseFragment(), MovieDetailsView {
   }
 
   override fun showErrorMessage(message: String) {
-    val navDirections = MovieDetailsFragmentDirections.actionMovieDetailsToErrorDialog(message)
-    Navigation.findNavController(requireView()).navigate(navDirections)
+    //val navDirections = MovieDetailsFragmentDirections.actionMovieDetailsToErrorDialog(message)
+    //Navigation.findNavController(requireView()).navigate(navDirections)
   }
 
   override fun showCanceledMessage() {

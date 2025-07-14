@@ -1,13 +1,12 @@
 package com.dpfht.tmdbcleanmvp.feature.moviedetails
 
-import androidx.navigation.NavDirections
 import com.dpfht.tmdbcleanmvp.BuildConfig
-import com.dpfht.tmdbcleanmvp.Config
-import com.dpfht.tmdbcleanmvp.core.domain.model.ModelResultWrapper.ErrorResult
-import com.dpfht.tmdbcleanmvp.core.domain.model.ModelResultWrapper.Success
+import com.dpfht.tmdbcleanmvp.domain.entity.Result.Success
+import com.dpfht.tmdbcleanmvp.domain.entity.Result.Error
 import com.dpfht.tmdbcleanmvp.feature.moviedetails.MovieDetailsContract.MovieDetailsModel
 import com.dpfht.tmdbcleanmvp.feature.moviedetails.MovieDetailsContract.MovieDetailsPresenter
 import com.dpfht.tmdbcleanmvp.feature.moviedetails.MovieDetailsContract.MovieDetailsView
+import com.dpfht.tmdbcleanmvp.framework.navigation.NavigationService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
@@ -17,7 +16,8 @@ import kotlinx.coroutines.launch
 class MovieDetailsPresenterImpl(
   private var movieDetailsView: MovieDetailsView? = null,
   private var movieDetailsModel: MovieDetailsModel? = null,
-  private val scope: CoroutineScope
+  private val scope: CoroutineScope,
+  private val navigationService: NavigationService
 ): MovieDetailsPresenter {
 
   private var _movieId = -1
@@ -31,6 +31,10 @@ class MovieDetailsPresenterImpl(
 
   override fun getMovieId(): Int {
     return _movieId
+  }
+
+  override fun getMovieTitle(): String {
+    return title
   }
 
   override fun start() {
@@ -47,9 +51,9 @@ class MovieDetailsPresenterImpl(
       movieDetailsModel?.let {
         when (val result = it.getMovieDetails(_movieId)) {
           is Success -> {
-            onSuccess(result.value.movieId, result.value.title, result.value.overview, result.value.posterPath)
+            onSuccess(result.value.id, result.value.title, result.value.overview, result.value.imageUrl)
           }
-          is ErrorResult -> {
+          is Error -> {
             onError(result.message)
           }
         }
@@ -76,11 +80,15 @@ class MovieDetailsPresenterImpl(
 
   private fun onError(message: String) {
     movieDetailsView?.hideLoadingDialog()
-    movieDetailsView?.showErrorMessage(message)
+    navigationService.navigateToErrorMessage(message)
   }
 
-  override fun getNavDirectionsToMovieReviews(): NavDirections {
-    return MovieDetailsFragmentDirections.actionMovieDetailsToMovieReviews(_movieId, title)
+  override fun navigateToMovieReviews(movieId: Int, movieTitle: String) {
+    navigationService.navigateToMovieReviews(movieId, movieTitle)
+  }
+
+  override fun navigateToMovieTrailer(movieId: Int) {
+    navigationService.navigateToMovieTrailer(movieId)
   }
 
   override fun onDestroy() {

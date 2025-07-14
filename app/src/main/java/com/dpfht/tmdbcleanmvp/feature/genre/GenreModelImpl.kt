@@ -1,15 +1,15 @@
 package com.dpfht.tmdbcleanmvp.feature.genre
 
-import com.dpfht.tmdbcleanmvp.core.data.repository.AppRepository
-import com.dpfht.tmdbcleanmvp.core.domain.model.GetMovieGenreResult
-import com.dpfht.tmdbcleanmvp.core.domain.model.ModelResultWrapper
+import com.dpfht.tmdbcleanmvp.domain.entity.GenreDomain
+import com.dpfht.tmdbcleanmvp.domain.entity.Result
+import com.dpfht.tmdbcleanmvp.domain.usecase.GetMovieGenreUseCase
 import com.dpfht.tmdbcleanmvp.feature.genre.GenreContract.GenreModel
 
 class GenreModelImpl(
-  private val appRepository: AppRepository
+  private val getMovieGenreUseCase: GetMovieGenreUseCase
 ): GenreModel {
 
-  override suspend fun getMovieGenre(): ModelResultWrapper<GetMovieGenreResult> {
-    return appRepository.getMovieGenre()
+  override suspend fun getMovieGenre(): Result<GenreDomain> {
+    return getMovieGenreUseCase()
   }
 }

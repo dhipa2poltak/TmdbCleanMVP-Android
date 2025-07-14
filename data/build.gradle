@@ -1,0 +1,22 @@
+plugins {
+  id 'java-library'
+  id 'org.jetbrains.kotlin.jvm'
+}
+
+java {
+  sourceCompatibility = ConfigData.sourceCompatibilityVersion
+  targetCompatibility = ConfigData.targetCompatibility
+}
+
+dependencies {
+
+  implementation project(":domain")
+
+  implementation Deps.gson
+  implementation Deps.annotation
+
+  testImplementation Deps.jUnit
+  testImplementation Deps.mockitoKotlin
+  testImplementation Deps.mockitoInline
+  testImplementation Deps.coroutinesTest
+}

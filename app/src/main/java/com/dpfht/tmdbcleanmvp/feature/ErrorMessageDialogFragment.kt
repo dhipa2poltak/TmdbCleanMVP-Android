@@ -25,13 +25,14 @@ class ErrorMessageDialogFragment : BottomSheetDialogFragment() {
 
     isCancelable = false
 
-    val args = ErrorMessageDialogFragmentArgs.fromBundle(requireArguments())
-    val message = args.message
-
-    binding.tvMessage.text = message
-
     binding.btnOk.setOnClickListener {
       dismiss()
+    }
+
+    arguments?.let {
+      val message = it.getString("message")
+
+      binding.tvMessage.text = message
     }
   }
 }

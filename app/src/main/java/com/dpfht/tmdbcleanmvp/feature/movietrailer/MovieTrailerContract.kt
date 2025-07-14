@@ -1,8 +1,8 @@
 package com.dpfht.tmdbcleanmvp.feature.movietrailer
 
 import com.dpfht.tmdbcleanmvp.feature.base.BasePresenter
-import com.dpfht.tmdbcleanmvp.core.domain.model.GetMovieTrailerResult
-import com.dpfht.tmdbcleanmvp.core.domain.model.ModelResultWrapper
+import com.dpfht.tmdbcleanmvp.domain.entity.Result
+import com.dpfht.tmdbcleanmvp.domain.entity.TrailerDomain
 
 interface MovieTrailerContract {
 
@@ -17,6 +17,6 @@ interface MovieTrailerContract {
   }
 
   interface MovieTrailerModel {
-    suspend fun getMovieTrailer(movieId: Int): ModelResultWrapper<GetMovieTrailerResult>
+    suspend fun getMovieTrailer(movieId: Int): Result<TrailerDomain>
   }
 }

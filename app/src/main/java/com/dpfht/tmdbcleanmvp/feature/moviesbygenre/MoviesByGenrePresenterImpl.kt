@@ -1,12 +1,12 @@
 package com.dpfht.tmdbcleanmvp.feature.moviesbygenre
 
-import androidx.navigation.NavDirections
 import com.dpfht.tmdbcleanmvp.feature.moviesbygenre.MoviesByGenreContract.MoviesByGenreModel
 import com.dpfht.tmdbcleanmvp.feature.moviesbygenre.MoviesByGenreContract.MoviesByGenrePresenter
 import com.dpfht.tmdbcleanmvp.feature.moviesbygenre.MoviesByGenreContract.MoviesByGenreView
-import com.dpfht.tmdbcleanmvp.core.data.model.remote.Movie
-import com.dpfht.tmdbcleanmvp.core.domain.model.ModelResultWrapper.ErrorResult
-import com.dpfht.tmdbcleanmvp.core.domain.model.ModelResultWrapper.Success
+import com.dpfht.tmdbcleanmvp.domain.entity.MovieEntity
+import com.dpfht.tmdbcleanmvp.domain.entity.Result.Success
+import com.dpfht.tmdbcleanmvp.domain.entity.Result.Error
+import com.dpfht.tmdbcleanmvp.framework.navigation.NavigationService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
@@ -16,8 +16,9 @@ import kotlinx.coroutines.launch
 class MoviesByGenrePresenterImpl(
   private var moviesByGenreView: MoviesByGenreView? = null,
   private var moviesByGenreModel: MoviesByGenreModel? = null,
-  private val movies: ArrayList<Movie>,
-  private val scope: CoroutineScope
+  private val movies: ArrayList<MovieEntity>,
+  private val scope: CoroutineScope,
+  private val navigationService: NavigationService
 ): MoviesByGenrePresenter {
 
   private var _genreId = -1
@@ -47,9 +48,9 @@ class MoviesByGenrePresenterImpl(
       moviesByGenreModel?.let {
         when (val result = it.getMoviesByGenre(_genreId, page + 1)) {
           is Success -> {
-            onSuccess(result.value.movies, result.value.page)
+            onSuccess(result.value.results, result.value.page)
           }
-          is ErrorResult -> {
+          is Error -> {
             onError(result.message)
           }
         }
@@ -57,7 +58,7 @@ class MoviesByGenrePresenterImpl(
     }
   }
 
-  private fun onSuccess(movies: List<Movie>, page: Int) {
+  private fun onSuccess(movies: List<MovieEntity>, page: Int) {
     if (movies.isNotEmpty()) {
       this.page = page
 
@@ -76,13 +77,13 @@ class MoviesByGenrePresenterImpl(
   private fun onError(message: String) {
     moviesByGenreView?.hideLoadingDialog()
     _isLoadingData = false
-    moviesByGenreView?.showErrorMessage(message)
+    navigationService.navigateToErrorMessage(message)
   }
 
-  override fun getNavDirectionsOnClickMovieAt(position: Int): NavDirections {
+  override fun navigateToMovieDetails(position: Int) {
     val movie = movies[position]
 
-    return MoviesByGenreFragmentDirections.actionMovieByGenreToMovieDetails(movie.id)
+    navigationService.navigateToMovieDetails(movie.id)
   }
 
   override fun onDestroy() {

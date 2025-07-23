@@ -93,6 +93,7 @@ dependencies {
   implementation fileTree(dir: "libs", include: ["*.jar"])
   //implementation project(':core')
   implementation project(':framework')
+  implementation project(':data')
   implementation project(':domain')
 
   implementation 'androidx.core:core-ktx:1.9.0'

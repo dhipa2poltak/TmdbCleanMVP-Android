@@ -8,8 +8,8 @@ import android.os.StrictMode.VmPolicy
 import androidx.multidex.MultiDex
 import com.dpfht.tmdbcleanmvp.framework.Config
 import com.dpfht.tmdbcleanmvp.framework.di.ApplicationComponent
-import com.dpfht.tmdbcleanmvp.framework.di.module.ApplicationModule
 import com.dpfht.tmdbcleanmvp.framework.di.DaggerApplicationComponent
+import com.dpfht.tmdbcleanmvp.framework.di.module.ApplicationModule
 import com.dpfht.tmdbcleanmvp.framework.di.module.NetworkModule
 import com.dpfht.tmdbcleanmvp.framework.di.provider.ApplicationComponentProvider
 

@@ -1,4 +1,4 @@
-package com.dpfht.tmdbcleanmvp.feature.genre
+package com.dpfht.tmdbcleanmvp.feature_genre
 
 import android.content.Context
 import android.os.Bundle
@@ -6,24 +6,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.dpfht.tmdbcleanmvp.R
-import com.dpfht.tmdbcleanmvp.TheApplication
-import com.dpfht.tmdbcleanmvp.databinding.FragmentGenreBinding
-import com.dpfht.tmdbcleanmvp.feature.genre.GenreContract.GenrePresenter
-import com.dpfht.tmdbcleanmvp.feature.genre.GenreContract.GenreView
-import com.dpfht.tmdbcleanmvp.feature.genre.adapter.GenreAdapter
-import com.dpfht.tmdbcleanmvp.feature.genre.di.DaggerGenreComponent
-import com.dpfht.tmdbcleanmvp.feature.genre.di.GenreModule
+import com.dpfht.tmdbcleanmvp.feature_genre.adapter.GenreAdapter
+import com.dpfht.tmdbcleanmvp.feature_genre.databinding.FragmentGenreBinding
+import com.dpfht.tmdbcleanmvp.feature_genre.di.DaggerGenreComponent
+import com.dpfht.tmdbcleanmvp.feature_genre.di.GenreModule
 import com.dpfht.tmdbcleanmvp.framework.base.BaseFragment
+import com.dpfht.tmdbcleanmvp.framework.di.provider.ApplicationComponentProvider
 import com.dpfht.tmdbcleanmvp.framework.di.provider.NavigationComponentProvider
 import javax.inject.Inject
+import com.dpfht.tmdbcleanmvp.framework.R as FrameworkR
 
-class GenreFragment : BaseFragment(), GenreView {
+class GenreFragment : BaseFragment(), GenreContract.GenreView {
 
   private lateinit var binding: FragmentGenreBinding
 
   @Inject
-  lateinit var presenter: GenrePresenter
+  lateinit var presenter: GenreContract.GenrePresenter
   
   @Inject
   lateinit var adapter: GenreAdapter
@@ -35,7 +33,7 @@ class GenreFragment : BaseFragment(), GenreView {
       .builder()
       .genreModule(GenreModule(this))
       .navigationComponent((requireActivity() as NavigationComponentProvider).provideNavigationComponent())
-      .applicationComponent(TheApplication.instance.applicationComponent)
+      .applicationComponent((requireActivity().application as ApplicationComponentProvider).provideApplicationComponent())
       .build()
 
     genreComponent.inject(this)
@@ -91,6 +89,6 @@ class GenreFragment : BaseFragment(), GenreView {
   }
 
   override fun showCanceledMessage() {
-    showErrorMessage(getString(R.string.canceled_message))
+    showErrorMessage(getString(FrameworkR.string.canceled_message))
   }
 }

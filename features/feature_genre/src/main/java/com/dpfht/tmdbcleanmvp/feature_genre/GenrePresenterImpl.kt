@@ -1,11 +1,8 @@
-package com.dpfht.tmdbcleanmvp.feature.genre
+package com.dpfht.tmdbcleanmvp.feature_genre
 
 import com.dpfht.tmdbcleanmvp.domain.entity.GenreEntity
 import com.dpfht.tmdbcleanmvp.domain.entity.Result.Error
 import com.dpfht.tmdbcleanmvp.domain.entity.Result.Success
-import com.dpfht.tmdbcleanmvp.feature.genre.GenreContract.GenreModel
-import com.dpfht.tmdbcleanmvp.feature.genre.GenreContract.GenrePresenter
-import com.dpfht.tmdbcleanmvp.feature.genre.GenreContract.GenreView
 import com.dpfht.tmdbcleanmvp.framework.navigation.NavigationService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -14,12 +11,12 @@ import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 
 class GenrePresenterImpl(
-  private var genreView: GenreView? = null,
-  private var genreModel: GenreModel? = null,
+  private var genreView: GenreContract.GenreView? = null,
+  private var genreModel: GenreContract.GenreModel? = null,
   private val genres: ArrayList<GenreEntity>,
   private val scope: CoroutineScope,
   private val navigationService: NavigationService
-): GenrePresenter {
+): GenreContract.GenrePresenter {
 
   override fun start() {
     if (genres.isEmpty()) {

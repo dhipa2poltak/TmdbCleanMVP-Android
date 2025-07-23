@@ -1,4 +1,4 @@
-package com.dpfht.tmdbcleanmvp.feature.genre
+package com.dpfht.tmdbcleanmvp.feature_genre
 
 import com.dpfht.tmdbcleanmvp.domain.entity.GenreDomain
 import com.dpfht.tmdbcleanmvp.domain.entity.Result

@@ -1,13 +1,12 @@
-package com.dpfht.tmdbcleanmvp.feature.genre
+package com.dpfht.tmdbcleanmvp.feature_genre
 
 import com.dpfht.tmdbcleanmvp.domain.entity.GenreDomain
 import com.dpfht.tmdbcleanmvp.domain.entity.Result
 import com.dpfht.tmdbcleanmvp.domain.usecase.GetMovieGenreUseCase
-import com.dpfht.tmdbcleanmvp.feature.genre.GenreContract.GenreModel
 
 class GenreModelImpl(
   private val getMovieGenreUseCase: GetMovieGenreUseCase
-): GenreModel {
+): GenreContract.GenreModel {
 
   override suspend fun getMovieGenre(): Result<GenreDomain> {
     return getMovieGenreUseCase()

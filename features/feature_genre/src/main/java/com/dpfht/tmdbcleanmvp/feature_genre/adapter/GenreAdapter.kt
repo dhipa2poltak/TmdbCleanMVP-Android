@@ -1,10 +1,10 @@
-package com.dpfht.tmdbcleanmvp.feature.genre.adapter
+package com.dpfht.tmdbcleanmvp.feature_genre.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.dpfht.tmdbcleanmvp.databinding.RowGenreBinding
 import com.dpfht.tmdbcleanmvp.domain.entity.GenreEntity
+import com.dpfht.tmdbcleanmvp.feature_genre.databinding.RowGenreBinding
 
 class GenreAdapter(private val genres: ArrayList<GenreEntity>): RecyclerView.Adapter<GenreAdapter.GenreHolder>() {
 

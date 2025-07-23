@@ -1,10 +1,10 @@
-package com.dpfht.tmdbcleanmvp.feature
+package com.dpfht.tmdbcleanmvp.feature_error_message
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.dpfht.tmdbcleanmvp.databinding.FragmentErrorMessageDialogBinding
+import com.dpfht.tmdbcleanmvp.feature_error_message.databinding.FragmentErrorMessageDialogBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class ErrorMessageDialogFragment : BottomSheetDialogFragment() {

@@ -92,6 +92,7 @@ dependencies {
 
   implementation fileTree(dir: "libs", include: ["*.jar"])
   implementation project(':features:feature_splash')
+  implementation project(":features:feature_error_message")
   implementation project(':framework')
   implementation project(':data')
   implementation project(':domain')

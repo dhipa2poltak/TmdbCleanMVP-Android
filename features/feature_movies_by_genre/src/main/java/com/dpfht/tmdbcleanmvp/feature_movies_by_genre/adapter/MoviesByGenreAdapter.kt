@@ -1,10 +1,10 @@
-package com.dpfht.tmdbcleanmvp.feature.moviesbygenre.adapter
+package com.dpfht.tmdbcleanmvp.feature_movies_by_genre.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.dpfht.tmdbcleanmvp.databinding.RowMovieBinding
 import com.dpfht.tmdbcleanmvp.domain.entity.MovieEntity
+import com.dpfht.tmdbcleanmvp.feature_movies_by_genre.databinding.RowMovieBinding
 
 class MoviesByGenreAdapter(private val movies: ArrayList<MovieEntity>): RecyclerView.Adapter<MoviesByGenreAdapter.MovieByGenreHolder>() {
 

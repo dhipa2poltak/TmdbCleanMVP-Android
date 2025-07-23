@@ -1,4 +1,4 @@
-package com.dpfht.tmdbcleanmvp.feature.moviesbygenre
+package com.dpfht.tmdbcleanmvp.feature_movies_by_genre
 
 import com.dpfht.tmdbcleanmvp.domain.entity.DiscoverMovieByGenreDomain
 import com.dpfht.tmdbcleanmvp.domain.entity.Result

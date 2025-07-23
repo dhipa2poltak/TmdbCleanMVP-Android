@@ -1,9 +1,7 @@
 plugins {
   id 'com.android.application'
-  //id 'kotlin-android'
   id 'org.jetbrains.kotlin.android'
   id 'kotlin-kapt'
-  //id 'androidx.navigation.safeargs.kotlin'
 }
 
 android {
@@ -94,6 +92,7 @@ dependencies {
   implementation project(':features:feature_splash')
   implementation project(":features:feature_error_message")
   implementation project(":features:feature_genre")
+  implementation project(":features:feature_movies_by_genre")
   implementation project(':framework')
   implementation project(':data')
   implementation project(':domain')

@@ -1,4 +1,4 @@
-package com.dpfht.tmdbcleanmvp.feature.moviesbygenre
+package com.dpfht.tmdbcleanmvp.feature_movies_by_genre
 
 import android.content.Context
 import android.os.Bundle
@@ -7,25 +7,22 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.dpfht.tmdbcleanmvp.R
-import com.dpfht.tmdbcleanmvp.TheApplication
-import com.dpfht.tmdbcleanmvp.databinding.FragmentMoviesByGenreBinding
-import com.dpfht.tmdbcleanmvp.feature.moviesbygenre.MoviesByGenreContract.MoviesByGenrePresenter
-import com.dpfht.tmdbcleanmvp.feature.moviesbygenre.MoviesByGenreContract.MoviesByGenreView
-import com.dpfht.tmdbcleanmvp.feature.moviesbygenre.adapter.MoviesByGenreAdapter
-import com.dpfht.tmdbcleanmvp.feature.moviesbygenre.adapter.MoviesByGenreAdapter.OnClickMovieListener
-import com.dpfht.tmdbcleanmvp.feature.moviesbygenre.di.DaggerMoviesByGenreComponent
-import com.dpfht.tmdbcleanmvp.feature.moviesbygenre.di.MoviesByGenreModule
+import com.dpfht.tmdbcleanmvp.feature_movies_by_genre.adapter.MoviesByGenreAdapter
+import com.dpfht.tmdbcleanmvp.feature_movies_by_genre.databinding.FragmentMoviesByGenreBinding
+import com.dpfht.tmdbcleanmvp.feature_movies_by_genre.di.DaggerMoviesByGenreComponent
+import com.dpfht.tmdbcleanmvp.feature_movies_by_genre.di.MoviesByGenreModule
 import com.dpfht.tmdbcleanmvp.framework.base.BaseFragment
+import com.dpfht.tmdbcleanmvp.framework.di.provider.ApplicationComponentProvider
 import com.dpfht.tmdbcleanmvp.framework.di.provider.NavigationComponentProvider
 import javax.inject.Inject
+import com.dpfht.tmdbcleanmvp.framework.R as FrameworkR;
 
-class MoviesByGenreFragment : BaseFragment(), MoviesByGenreView {
+class MoviesByGenreFragment : BaseFragment(), MoviesByGenreContract.MoviesByGenreView {
 
   private lateinit var binding: FragmentMoviesByGenreBinding
 
   @Inject
-  lateinit var presenter: MoviesByGenrePresenter
+  lateinit var presenter: MoviesByGenreContract.MoviesByGenrePresenter
 
   @Inject
   lateinit var adapter: MoviesByGenreAdapter
@@ -37,7 +34,7 @@ class MoviesByGenreFragment : BaseFragment(), MoviesByGenreView {
       .builder()
       .moviesByGenreModule(MoviesByGenreModule(this))
       .navigationComponent((requireActivity() as NavigationComponentProvider).provideNavigationComponent())
-      .applicationComponent(TheApplication.instance.applicationComponent)
+      .applicationComponent((requireActivity().application as ApplicationComponentProvider).provideApplicationComponent())
       .build()
 
     moviesByGenreComponent.inject(this)
@@ -61,7 +58,7 @@ class MoviesByGenreFragment : BaseFragment(), MoviesByGenreView {
     binding.rvMoviesByGenre.layoutManager = layoutManager
     binding.rvMoviesByGenre.adapter = adapter
 
-    adapter.onClickMovieListener = object : OnClickMovieListener {
+    adapter.onClickMovieListener = object : MoviesByGenreAdapter.OnClickMovieListener {
       override fun onClickMovie(position: Int) {
         presenter.navigateToMovieDetails(position)
       }
@@ -115,6 +112,6 @@ class MoviesByGenreFragment : BaseFragment(), MoviesByGenreView {
   }
 
   override fun showCanceledMessage() {
-    showErrorMessage(getString(R.string.canceled_message))
+    showErrorMessage(getString(FrameworkR.string.canceled_message))
   }
 }

@@ -1,21 +1,19 @@
-package com.dpfht.tmdbcleanmvp.feature.moviesbygenre.di
+package com.dpfht.tmdbcleanmvp.feature_movies_by_genre.di
 
 import android.content.Context
 import androidx.lifecycle.lifecycleScope
 import com.dpfht.tmdbcleanmvp.framework.di.ActivityContext
 import com.dpfht.tmdbcleanmvp.framework.di.module.FragmentModule
 import com.dpfht.tmdbcleanmvp.framework.di.FragmentScope
-import com.dpfht.tmdbcleanmvp.feature.moviesbygenre.MoviesByGenreContract.MoviesByGenreModel
-import com.dpfht.tmdbcleanmvp.feature.moviesbygenre.MoviesByGenreContract.MoviesByGenrePresenter
-import com.dpfht.tmdbcleanmvp.feature.moviesbygenre.MoviesByGenreContract.MoviesByGenreView
-import com.dpfht.tmdbcleanmvp.feature.moviesbygenre.MoviesByGenreFragment
-import com.dpfht.tmdbcleanmvp.feature.moviesbygenre.MoviesByGenreModelImpl
-import com.dpfht.tmdbcleanmvp.feature.moviesbygenre.MoviesByGenrePresenterImpl
-import com.dpfht.tmdbcleanmvp.feature.moviesbygenre.adapter.MoviesByGenreAdapter
 import com.dpfht.tmdbcleanmvp.domain.entity.MovieEntity
 import com.dpfht.tmdbcleanmvp.domain.repository.AppRepository
 import com.dpfht.tmdbcleanmvp.domain.usecase.GetMovieByGenreUseCase
 import com.dpfht.tmdbcleanmvp.domain.usecase.GetMovieByGenreUseCaseImpl
+import com.dpfht.tmdbcleanmvp.feature_movies_by_genre.MoviesByGenreContract
+import com.dpfht.tmdbcleanmvp.feature_movies_by_genre.MoviesByGenreFragment
+import com.dpfht.tmdbcleanmvp.feature_movies_by_genre.MoviesByGenreModelImpl
+import com.dpfht.tmdbcleanmvp.feature_movies_by_genre.MoviesByGenrePresenterImpl
+import com.dpfht.tmdbcleanmvp.feature_movies_by_genre.adapter.MoviesByGenreAdapter
 import com.dpfht.tmdbcleanmvp.framework.navigation.NavigationService
 import dagger.Module
 import dagger.Provides
@@ -33,7 +31,7 @@ class MoviesByGenreModule(private val moviesByGenreFragment: MoviesByGenreFragme
 
   @Provides
   @FragmentScope
-  fun provideMoviesByGenreView(): MoviesByGenreView {
+  fun provideMoviesByGenreView(): MoviesByGenreContract.MoviesByGenreView {
     return moviesByGenreFragment
   }
 
@@ -51,7 +49,7 @@ class MoviesByGenreModule(private val moviesByGenreFragment: MoviesByGenreFragme
 
   @Provides
   @FragmentScope
-  fun provideMoviesByGenreModel(getMovieByGenreUseCase: GetMovieByGenreUseCase): MoviesByGenreModel {
+  fun provideMoviesByGenreModel(getMovieByGenreUseCase: GetMovieByGenreUseCase): MoviesByGenreContract.MoviesByGenreModel {
     return MoviesByGenreModelImpl(getMovieByGenreUseCase)
   }
 
@@ -64,12 +62,12 @@ class MoviesByGenreModule(private val moviesByGenreFragment: MoviesByGenreFragme
   @Provides
   @FragmentScope
   fun provideMoviesByGenrePresenter(
-    moviesByGenreView: MoviesByGenreView,
-    moviesByGenreModel: MoviesByGenreModel,
+    moviesByGenreView: MoviesByGenreContract.MoviesByGenreView,
+    moviesByGenreModel: MoviesByGenreContract.MoviesByGenreModel,
     movies: ArrayList<MovieEntity>,
     scope: CoroutineScope,
     navigationService: NavigationService
-  ): MoviesByGenrePresenter {
+  ): MoviesByGenreContract.MoviesByGenrePresenter {
     return MoviesByGenrePresenterImpl(moviesByGenreView, moviesByGenreModel, movies, scope, navigationService)
   }
 

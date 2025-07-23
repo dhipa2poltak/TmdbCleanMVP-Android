@@ -1,8 +1,5 @@
-package com.dpfht.tmdbcleanmvp.feature.moviesbygenre
+package com.dpfht.tmdbcleanmvp.feature_movies_by_genre
 
-import com.dpfht.tmdbcleanmvp.feature.moviesbygenre.MoviesByGenreContract.MoviesByGenreModel
-import com.dpfht.tmdbcleanmvp.feature.moviesbygenre.MoviesByGenreContract.MoviesByGenrePresenter
-import com.dpfht.tmdbcleanmvp.feature.moviesbygenre.MoviesByGenreContract.MoviesByGenreView
 import com.dpfht.tmdbcleanmvp.domain.entity.MovieEntity
 import com.dpfht.tmdbcleanmvp.domain.entity.Result.Success
 import com.dpfht.tmdbcleanmvp.domain.entity.Result.Error
@@ -14,12 +11,12 @@ import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 
 class MoviesByGenrePresenterImpl(
-  private var moviesByGenreView: MoviesByGenreView? = null,
-  private var moviesByGenreModel: MoviesByGenreModel? = null,
+  private var moviesByGenreView: MoviesByGenreContract.MoviesByGenreView? = null,
+  private var moviesByGenreModel: MoviesByGenreContract.MoviesByGenreModel? = null,
   private val movies: ArrayList<MovieEntity>,
   private val scope: CoroutineScope,
   private val navigationService: NavigationService
-): MoviesByGenrePresenter {
+): MoviesByGenreContract.MoviesByGenrePresenter {
 
   private var _genreId = -1
   private var page = 0

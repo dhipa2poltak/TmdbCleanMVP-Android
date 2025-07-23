@@ -1,8 +1,8 @@
 package com.dpfht.tmdbcleanmvp.feature.movietrailer
 
-import com.dpfht.tmdbcleanmvp.feature.base.BasePresenter
 import com.dpfht.tmdbcleanmvp.domain.entity.Result
 import com.dpfht.tmdbcleanmvp.domain.entity.TrailerDomain
+import com.dpfht.tmdbcleanmvp.framework.base.BasePresenter
 
 interface MovieTrailerContract {
 

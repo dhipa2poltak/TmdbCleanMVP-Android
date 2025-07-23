@@ -8,13 +8,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dpfht.tmdbcleanmvp.R
 import com.dpfht.tmdbcleanmvp.TheApplication
-import com.dpfht.tmdbcleanmvp.feature.base.BaseFragment
 import com.dpfht.tmdbcleanmvp.databinding.FragmentGenreBinding
 import com.dpfht.tmdbcleanmvp.feature.genre.GenreContract.GenrePresenter
 import com.dpfht.tmdbcleanmvp.feature.genre.GenreContract.GenreView
 import com.dpfht.tmdbcleanmvp.feature.genre.adapter.GenreAdapter
 import com.dpfht.tmdbcleanmvp.feature.genre.di.DaggerGenreComponent
 import com.dpfht.tmdbcleanmvp.feature.genre.di.GenreModule
+import com.dpfht.tmdbcleanmvp.framework.base.BaseFragment
 import com.dpfht.tmdbcleanmvp.framework.di.provider.NavigationComponentProvider
 import javax.inject.Inject
 

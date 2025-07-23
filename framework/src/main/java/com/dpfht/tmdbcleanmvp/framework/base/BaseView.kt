@@ -1,4 +1,4 @@
-package com.dpfht.tmdbcleanmvp.feature.base
+package com.dpfht.tmdbcleanmvp.framework.base
 
 interface BaseView {
 

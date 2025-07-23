@@ -8,12 +8,12 @@ import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.dpfht.tmdbcleanmvp.R
 import com.dpfht.tmdbcleanmvp.TheApplication
-import com.dpfht.tmdbcleanmvp.feature.base.BaseFragment
 import com.dpfht.tmdbcleanmvp.databinding.FragmentMovieDetailsBinding
 import com.dpfht.tmdbcleanmvp.feature.moviedetails.MovieDetailsContract.MovieDetailsPresenter
 import com.dpfht.tmdbcleanmvp.feature.moviedetails.MovieDetailsContract.MovieDetailsView
 import com.dpfht.tmdbcleanmvp.feature.moviedetails.di.DaggerMovieDetailsComponent
 import com.dpfht.tmdbcleanmvp.feature.moviedetails.di.MovieDetailsModule
+import com.dpfht.tmdbcleanmvp.framework.base.BaseFragment
 import com.dpfht.tmdbcleanmvp.framework.di.provider.NavigationComponentProvider
 import javax.inject.Inject
 

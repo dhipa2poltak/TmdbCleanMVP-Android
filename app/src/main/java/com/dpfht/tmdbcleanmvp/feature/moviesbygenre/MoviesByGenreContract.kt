@@ -1,10 +1,9 @@
 package com.dpfht.tmdbcleanmvp.feature.moviesbygenre
 
-import androidx.navigation.NavDirections
-import com.dpfht.tmdbcleanmvp.feature.base.BasePresenter
-import com.dpfht.tmdbcleanmvp.feature.base.BaseView
 import com.dpfht.tmdbcleanmvp.domain.entity.DiscoverMovieByGenreDomain
 import com.dpfht.tmdbcleanmvp.domain.entity.Result
+import com.dpfht.tmdbcleanmvp.framework.base.BasePresenter
+import com.dpfht.tmdbcleanmvp.framework.base.BaseView
 
 interface MoviesByGenreContract {
 

@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dpfht.tmdbcleanmvp.R
 import com.dpfht.tmdbcleanmvp.TheApplication
-import com.dpfht.tmdbcleanmvp.feature.base.BaseFragment
 import com.dpfht.tmdbcleanmvp.databinding.FragmentMoviesByGenreBinding
 import com.dpfht.tmdbcleanmvp.feature.moviesbygenre.MoviesByGenreContract.MoviesByGenrePresenter
 import com.dpfht.tmdbcleanmvp.feature.moviesbygenre.MoviesByGenreContract.MoviesByGenreView
@@ -17,6 +16,7 @@ import com.dpfht.tmdbcleanmvp.feature.moviesbygenre.adapter.MoviesByGenreAdapter
 import com.dpfht.tmdbcleanmvp.feature.moviesbygenre.adapter.MoviesByGenreAdapter.OnClickMovieListener
 import com.dpfht.tmdbcleanmvp.feature.moviesbygenre.di.DaggerMoviesByGenreComponent
 import com.dpfht.tmdbcleanmvp.feature.moviesbygenre.di.MoviesByGenreModule
+import com.dpfht.tmdbcleanmvp.framework.base.BaseFragment
 import com.dpfht.tmdbcleanmvp.framework.di.provider.NavigationComponentProvider
 import javax.inject.Inject
 

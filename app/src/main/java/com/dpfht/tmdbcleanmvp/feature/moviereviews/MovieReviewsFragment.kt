@@ -9,13 +9,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dpfht.tmdbcleanmvp.R
 import com.dpfht.tmdbcleanmvp.TheApplication
-import com.dpfht.tmdbcleanmvp.feature.base.BaseFragment
 import com.dpfht.tmdbcleanmvp.databinding.FragmentMovieReviewsBinding
 import com.dpfht.tmdbcleanmvp.feature.moviereviews.MovieReviewsContract.MovieReviewsPresenter
 import com.dpfht.tmdbcleanmvp.feature.moviereviews.MovieReviewsContract.MovieReviewsView
 import com.dpfht.tmdbcleanmvp.feature.moviereviews.adapter.MovieReviewsAdapter
 import com.dpfht.tmdbcleanmvp.feature.moviereviews.di.DaggerMovieReviewsComponent
 import com.dpfht.tmdbcleanmvp.feature.moviereviews.di.MovieReviewsModule
+import com.dpfht.tmdbcleanmvp.framework.base.BaseFragment
 import com.dpfht.tmdbcleanmvp.framework.di.provider.NavigationComponentProvider
 import javax.inject.Inject
 

@@ -1,9 +1,9 @@
 package com.dpfht.tmdbcleanmvp.feature.moviereviews
 
-import com.dpfht.tmdbcleanmvp.feature.base.BasePresenter
-import com.dpfht.tmdbcleanmvp.feature.base.BaseView
 import com.dpfht.tmdbcleanmvp.domain.entity.Result
 import com.dpfht.tmdbcleanmvp.domain.entity.ReviewDomain
+import com.dpfht.tmdbcleanmvp.framework.base.BasePresenter
+import com.dpfht.tmdbcleanmvp.framework.base.BaseView
 
 interface MovieReviewsContract {
 

@@ -1,6 +1,6 @@
-package com.dpfht.tmdbcleanmvp.feature.splash.di
+package com.dpfht.tmdbcleanmvp.feature_splash.di
 
-import com.dpfht.tmdbcleanmvp.feature.splash.SplashFragment
+import com.dpfht.tmdbcleanmvp.feature_splash.SplashFragment
 import com.dpfht.tmdbcleanmvp.framework.di.FragmentScope
 import com.dpfht.tmdbcleanmvp.framework.di.NavigationComponent
 import dagger.Component

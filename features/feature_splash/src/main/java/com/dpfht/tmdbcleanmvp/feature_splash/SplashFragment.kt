@@ -1,4 +1,4 @@
-package com.dpfht.tmdbcleanmvp.feature.splash
+package com.dpfht.tmdbcleanmvp.feature_splash
 
 import android.os.Bundle
 import android.os.Handler
@@ -8,8 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.dpfht.tmdbcleanmvp.databinding.FragmentSplashBinding
-import com.dpfht.tmdbcleanmvp.feature.splash.di.DaggerSplashComponent
+import com.dpfht.tmdbcleanmvp.feature_splash.databinding.FragmentSplashBinding
+import com.dpfht.tmdbcleanmvp.feature_splash.di.DaggerSplashComponent
 import com.dpfht.tmdbcleanmvp.framework.di.provider.NavigationComponentProvider
 import com.dpfht.tmdbcleanmvp.framework.navigation.NavigationService
 import javax.inject.Inject
@@ -44,7 +44,7 @@ class SplashFragment : Fragment() {
 
     val handler = Handler(Looper.getMainLooper())
     handler.postDelayed({
-                        navigateToNextScreen()
+      navigateToNextScreen()
     }, 3000)
   }
 

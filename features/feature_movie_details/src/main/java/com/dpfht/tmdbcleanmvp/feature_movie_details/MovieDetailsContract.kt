@@ -1,4 +1,4 @@
-package com.dpfht.tmdbcleanmvp.feature.moviedetails
+package com.dpfht.tmdbcleanmvp.feature_movie_details
 
 import com.dpfht.tmdbcleanmvp.domain.entity.MovieDetailsDomain
 import com.dpfht.tmdbcleanmvp.domain.entity.Result

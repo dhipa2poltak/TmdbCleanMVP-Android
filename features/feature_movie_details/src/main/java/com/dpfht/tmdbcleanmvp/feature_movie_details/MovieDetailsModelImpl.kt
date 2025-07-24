@@ -1,13 +1,12 @@
-package com.dpfht.tmdbcleanmvp.feature.moviedetails
+package com.dpfht.tmdbcleanmvp.feature_movie_details
 
 import com.dpfht.tmdbcleanmvp.domain.entity.MovieDetailsDomain
 import com.dpfht.tmdbcleanmvp.domain.entity.Result
 import com.dpfht.tmdbcleanmvp.domain.usecase.GetMovieDetailsUseCase
-import com.dpfht.tmdbcleanmvp.feature.moviedetails.MovieDetailsContract.MovieDetailsModel
 
 class MovieDetailsModelImpl(
   private val getMovieDetailsUseCase: GetMovieDetailsUseCase
-): MovieDetailsModel {
+): MovieDetailsContract.MovieDetailsModel {
 
   override suspend fun getMovieDetails(movieId: Int): Result<MovieDetailsDomain> {
     return getMovieDetailsUseCase(movieId)

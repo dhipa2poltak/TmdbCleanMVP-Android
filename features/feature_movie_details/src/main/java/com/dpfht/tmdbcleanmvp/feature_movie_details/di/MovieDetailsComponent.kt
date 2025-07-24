@@ -1,8 +1,8 @@
-package com.dpfht.tmdbcleanmvp.feature.moviedetails.di
+package com.dpfht.tmdbcleanmvp.feature_movie_details.di
 
+import com.dpfht.tmdbcleanmvp.feature_movie_details.MovieDetailsFragment
 import com.dpfht.tmdbcleanmvp.framework.di.ApplicationComponent
 import com.dpfht.tmdbcleanmvp.framework.di.FragmentScope
-import com.dpfht.tmdbcleanmvp.feature.moviedetails.MovieDetailsFragment
 import com.dpfht.tmdbcleanmvp.framework.di.NavigationComponent
 import dagger.Component
 

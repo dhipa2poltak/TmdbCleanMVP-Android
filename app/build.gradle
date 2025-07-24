@@ -93,6 +93,7 @@ dependencies {
   implementation project(":features:feature_error_message")
   implementation project(":features:feature_genre")
   implementation project(":features:feature_movies_by_genre")
+  implementation project(":features:feature_movie_details")
   implementation project(':framework')
   implementation project(':data')
   implementation project(':domain')

@@ -1,11 +1,8 @@
-package com.dpfht.tmdbcleanmvp.feature.moviedetails
+package com.dpfht.tmdbcleanmvp.feature_movie_details
 
-import com.dpfht.tmdbcleanmvp.BuildConfig
 import com.dpfht.tmdbcleanmvp.domain.entity.Result.Success
 import com.dpfht.tmdbcleanmvp.domain.entity.Result.Error
-import com.dpfht.tmdbcleanmvp.feature.moviedetails.MovieDetailsContract.MovieDetailsModel
-import com.dpfht.tmdbcleanmvp.feature.moviedetails.MovieDetailsContract.MovieDetailsPresenter
-import com.dpfht.tmdbcleanmvp.feature.moviedetails.MovieDetailsContract.MovieDetailsView
+import com.dpfht.tmdbcleanmvp.framework.BuildConfig
 import com.dpfht.tmdbcleanmvp.framework.navigation.NavigationService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -14,11 +11,11 @@ import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 
 class MovieDetailsPresenterImpl(
-  private var movieDetailsView: MovieDetailsView? = null,
-  private var movieDetailsModel: MovieDetailsModel? = null,
+  private var movieDetailsView: MovieDetailsContract.MovieDetailsView? = null,
+  private var movieDetailsModel: MovieDetailsContract.MovieDetailsModel? = null,
   private val scope: CoroutineScope,
   private val navigationService: NavigationService
-): MovieDetailsPresenter {
+): MovieDetailsContract.MovieDetailsPresenter {
 
   private var _movieId = -1
   private var title = ""
@@ -64,7 +61,8 @@ class MovieDetailsPresenterImpl(
   private fun onSuccess(pMovieId: Int, pTitle: String, pOverview: String, pPosterPath: String) {
     imageUrl = ""
     if (pPosterPath.isNotEmpty()) {
-      imageUrl = BuildConfig.IMAGE_URL_BASE_PATH + pPosterPath
+      //-- disini
+      //imageUrl = BuildConfig.IMAGE_URL_BASE_PATH + pPosterPath
     }
 
     _movieId = pMovieId

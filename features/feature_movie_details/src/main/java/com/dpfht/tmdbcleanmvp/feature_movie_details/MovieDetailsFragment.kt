@@ -1,4 +1,4 @@
-package com.dpfht.tmdbcleanmvp.feature.moviedetails
+package com.dpfht.tmdbcleanmvp.feature_movie_details
 
 import android.content.Context
 import android.os.Bundle
@@ -6,23 +6,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
-import com.dpfht.tmdbcleanmvp.R
-import com.dpfht.tmdbcleanmvp.TheApplication
-import com.dpfht.tmdbcleanmvp.databinding.FragmentMovieDetailsBinding
-import com.dpfht.tmdbcleanmvp.feature.moviedetails.MovieDetailsContract.MovieDetailsPresenter
-import com.dpfht.tmdbcleanmvp.feature.moviedetails.MovieDetailsContract.MovieDetailsView
-import com.dpfht.tmdbcleanmvp.feature.moviedetails.di.DaggerMovieDetailsComponent
-import com.dpfht.tmdbcleanmvp.feature.moviedetails.di.MovieDetailsModule
+import com.dpfht.tmdbcleanmvp.feature_movie_details.databinding.FragmentMovieDetailsBinding
+import com.dpfht.tmdbcleanmvp.feature_movie_details.di.DaggerMovieDetailsComponent
+import com.dpfht.tmdbcleanmvp.feature_movie_details.di.MovieDetailsModule
 import com.dpfht.tmdbcleanmvp.framework.base.BaseFragment
+import com.dpfht.tmdbcleanmvp.framework.di.provider.ApplicationComponentProvider
 import com.dpfht.tmdbcleanmvp.framework.di.provider.NavigationComponentProvider
 import javax.inject.Inject
+import com.dpfht.tmdbcleanmvp.framework.R as FrameworkR
 
-class MovieDetailsFragment : BaseFragment(), MovieDetailsView {
+class MovieDetailsFragment : BaseFragment(), MovieDetailsContract.MovieDetailsView {
 
   private lateinit var binding: FragmentMovieDetailsBinding
 
   @Inject
-  lateinit var presenter: MovieDetailsPresenter
+  lateinit var presenter: MovieDetailsContract.MovieDetailsPresenter
 
   override fun onAttach(context: Context) {
     super.onAttach(context)
@@ -31,7 +29,7 @@ class MovieDetailsFragment : BaseFragment(), MovieDetailsView {
       .builder()
       .movieDetailsModule(MovieDetailsModule(this))
       .navigationComponent((requireActivity() as NavigationComponentProvider).provideNavigationComponent())
-      .applicationComponent(TheApplication.instance.applicationComponent)
+      .applicationComponent((requireActivity().application as ApplicationComponentProvider).provideApplicationComponent())
       .build()
 
     movieDetailsComponent.inject(this)
@@ -104,6 +102,6 @@ class MovieDetailsFragment : BaseFragment(), MovieDetailsView {
   }
 
   override fun showCanceledMessage() {
-    showErrorMessage(getString(R.string.canceled_message))
+    showErrorMessage(getString(FrameworkR.string.canceled_message))
   }
 }

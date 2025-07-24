@@ -1,19 +1,17 @@
-package com.dpfht.tmdbcleanmvp.feature.moviedetails.di
+package com.dpfht.tmdbcleanmvp.feature_movie_details.di
 
 import android.content.Context
 import androidx.lifecycle.lifecycleScope
 import com.dpfht.tmdbcleanmvp.framework.di.ActivityContext
 import com.dpfht.tmdbcleanmvp.framework.di.module.FragmentModule
 import com.dpfht.tmdbcleanmvp.framework.di.FragmentScope
-import com.dpfht.tmdbcleanmvp.feature.moviedetails.MovieDetailsContract.MovieDetailsModel
-import com.dpfht.tmdbcleanmvp.feature.moviedetails.MovieDetailsContract.MovieDetailsPresenter
-import com.dpfht.tmdbcleanmvp.feature.moviedetails.MovieDetailsContract.MovieDetailsView
-import com.dpfht.tmdbcleanmvp.feature.moviedetails.MovieDetailsFragment
-import com.dpfht.tmdbcleanmvp.feature.moviedetails.MovieDetailsModelImpl
-import com.dpfht.tmdbcleanmvp.feature.moviedetails.MovieDetailsPresenterImpl
 import com.dpfht.tmdbcleanmvp.domain.repository.AppRepository
 import com.dpfht.tmdbcleanmvp.domain.usecase.GetMovieDetailsUseCase
 import com.dpfht.tmdbcleanmvp.domain.usecase.GetMovieDetailsUseCaseImpl
+import com.dpfht.tmdbcleanmvp.feature_movie_details.MovieDetailsContract
+import com.dpfht.tmdbcleanmvp.feature_movie_details.MovieDetailsFragment
+import com.dpfht.tmdbcleanmvp.feature_movie_details.MovieDetailsModelImpl
+import com.dpfht.tmdbcleanmvp.feature_movie_details.MovieDetailsPresenterImpl
 import com.dpfht.tmdbcleanmvp.framework.navigation.NavigationService
 import dagger.Module
 import dagger.Provides
@@ -31,7 +29,7 @@ class MovieDetailsModule(private val movieDetailsFragment: MovieDetailsFragment)
 
   @Provides
   @FragmentScope
-  fun provideMovieDetailsView(): MovieDetailsView {
+  fun provideMovieDetailsView(): MovieDetailsContract.MovieDetailsView {
     return movieDetailsFragment
   }
 
@@ -49,18 +47,18 @@ class MovieDetailsModule(private val movieDetailsFragment: MovieDetailsFragment)
 
   @Provides
   @FragmentScope
-  fun provideMovieDetailsModel(getMovieDetailsUseCase: GetMovieDetailsUseCase): MovieDetailsModel {
+  fun provideMovieDetailsModel(getMovieDetailsUseCase: GetMovieDetailsUseCase): MovieDetailsContract.MovieDetailsModel {
     return MovieDetailsModelImpl(getMovieDetailsUseCase)
   }
 
   @Provides
   @FragmentScope
   fun provideMovieDetailsPresenter(
-    movieDetailsView: MovieDetailsView,
-    movieDetailsModel: MovieDetailsModel,
+    movieDetailsView: MovieDetailsContract.MovieDetailsView,
+    movieDetailsModel: MovieDetailsContract.MovieDetailsModel,
     scope: CoroutineScope,
     navigationService: NavigationService
-  ): MovieDetailsPresenter {
+  ): MovieDetailsContract.MovieDetailsPresenter {
     return MovieDetailsPresenterImpl(movieDetailsView, movieDetailsModel, scope, navigationService)
   }
 }

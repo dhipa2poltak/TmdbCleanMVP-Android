@@ -1,15 +1,13 @@
-package com.dpfht.tmdbcleanmvp.feature.movietrailer.di
+package com.dpfht.tmdbcleanmvp.feature_movie_trailer.di
 
 import com.dpfht.tmdbcleanmvp.domain.repository.AppRepository
 import com.dpfht.tmdbcleanmvp.domain.usecase.GetMovieTrailerUseCase
 import com.dpfht.tmdbcleanmvp.domain.usecase.GetMovieTrailerUseCaseImpl
+import com.dpfht.tmdbcleanmvp.feature_movie_trailer.MovieTrailerActivity
+import com.dpfht.tmdbcleanmvp.feature_movie_trailer.MovieTrailerContract
+import com.dpfht.tmdbcleanmvp.feature_movie_trailer.MovieTrailerModelImpl
+import com.dpfht.tmdbcleanmvp.feature_movie_trailer.MovieTrailerPresenterImpl
 import com.dpfht.tmdbcleanmvp.framework.di.ActivityScope
-import com.dpfht.tmdbcleanmvp.feature.movietrailer.MovieTrailerActivity
-import com.dpfht.tmdbcleanmvp.feature.movietrailer.MovieTrailerContract.MovieTrailerModel
-import com.dpfht.tmdbcleanmvp.feature.movietrailer.MovieTrailerContract.MovieTrailerPresenter
-import com.dpfht.tmdbcleanmvp.feature.movietrailer.MovieTrailerContract.MovieTrailerView
-import com.dpfht.tmdbcleanmvp.feature.movietrailer.MovieTrailerModelImpl
-import com.dpfht.tmdbcleanmvp.feature.movietrailer.MovieTrailerPresenterImpl
 import dagger.Module
 import dagger.Provides
 import kotlinx.coroutines.CoroutineScope
@@ -20,7 +18,7 @@ class MovieTrailerModule(private val movieTrailerActivity: MovieTrailerActivity)
 
   @Provides
   @ActivityScope
-  fun provideMovieTrailerView(): MovieTrailerView {
+  fun provideMovieTrailerView(): MovieTrailerContract.MovieTrailerView {
     return movieTrailerActivity
   }
 
@@ -44,17 +42,17 @@ class MovieTrailerModule(private val movieTrailerActivity: MovieTrailerActivity)
 
   @Provides
   @ActivityScope
-  fun provideMovieTrailerModel(getMovieTrailerUseCase: GetMovieTrailerUseCase): MovieTrailerModel {
+  fun provideMovieTrailerModel(getMovieTrailerUseCase: GetMovieTrailerUseCase): MovieTrailerContract.MovieTrailerModel {
     return MovieTrailerModelImpl(getMovieTrailerUseCase)
   }
 
   @Provides
   @ActivityScope
   fun provideMovieTrailerPresenter(
-    movieTrailerView: MovieTrailerView,
-    movieTrailerModel: MovieTrailerModel,
+    movieTrailerView: MovieTrailerContract.MovieTrailerView,
+    movieTrailerModel: MovieTrailerContract.MovieTrailerModel,
     scope: CoroutineScope
-  ): MovieTrailerPresenter {
+  ): MovieTrailerContract.MovieTrailerPresenter {
     return MovieTrailerPresenterImpl(movieTrailerView, movieTrailerModel, scope)
   }
 }

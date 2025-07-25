@@ -1,8 +1,8 @@
-package com.dpfht.tmdbcleanmvp.feature.movietrailer.di
+package com.dpfht.tmdbcleanmvp.feature_movie_trailer.di
 
+import com.dpfht.tmdbcleanmvp.feature_movie_trailer.MovieTrailerActivity
 import com.dpfht.tmdbcleanmvp.framework.di.ActivityScope
 import com.dpfht.tmdbcleanmvp.framework.di.ApplicationComponent
-import com.dpfht.tmdbcleanmvp.feature.movietrailer.MovieTrailerActivity
 import dagger.Component
 
 @Component(dependencies = [ApplicationComponent::class], modules = [MovieTrailerModule::class])

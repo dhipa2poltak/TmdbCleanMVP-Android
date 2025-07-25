@@ -1,4 +1,4 @@
-package com.dpfht.tmdbcleanmvp.feature.movietrailer
+package com.dpfht.tmdbcleanmvp.feature_movie_trailer
 
 import com.dpfht.tmdbcleanmvp.domain.entity.Result
 import com.dpfht.tmdbcleanmvp.domain.entity.TrailerDomain

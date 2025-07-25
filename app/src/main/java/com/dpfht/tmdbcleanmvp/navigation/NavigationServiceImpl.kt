@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.NavDeepLinkRequest
 import com.dpfht.tmdbcleanmvp.R
-import com.dpfht.tmdbcleanmvp.feature.movietrailer.MovieTrailerActivity
+import com.dpfht.tmdbcleanmvp.feature_movie_trailer.MovieTrailerActivity
 import com.dpfht.tmdbcleanmvp.framework.navigation.NavigationService
 
 class NavigationServiceImpl(

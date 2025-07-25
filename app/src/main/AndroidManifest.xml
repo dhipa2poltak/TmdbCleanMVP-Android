@@ -13,7 +13,7 @@
       android:supportsRtl="true"
       android:theme="@style/Theme.DemoTMDB">
     <activity
-        android:name="com.dpfht.tmdbcleanmvp.feature.movietrailer.MovieTrailerActivity"
+        android:name="com.dpfht.tmdbcleanmvp.feature_movie_trailer.MovieTrailerActivity"
         android:exported="false" />
     <activity
         android:name="com.dpfht.tmdbcleanmvp.MainActivity"

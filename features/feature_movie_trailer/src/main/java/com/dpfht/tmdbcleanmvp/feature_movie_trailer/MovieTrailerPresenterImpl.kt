@@ -1,11 +1,8 @@
-package com.dpfht.tmdbcleanmvp.feature.movietrailer
+package com.dpfht.tmdbcleanmvp.feature_movie_trailer
 
 import com.dpfht.tmdbcleanmvp.domain.entity.Result.Success
 import com.dpfht.tmdbcleanmvp.domain.entity.Result.Error
 import com.dpfht.tmdbcleanmvp.domain.entity.TrailerEntity
-import com.dpfht.tmdbcleanmvp.feature.movietrailer.MovieTrailerContract.MovieTrailerModel
-import com.dpfht.tmdbcleanmvp.feature.movietrailer.MovieTrailerContract.MovieTrailerPresenter
-import com.dpfht.tmdbcleanmvp.feature.movietrailer.MovieTrailerContract.MovieTrailerView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
@@ -14,10 +11,10 @@ import kotlinx.coroutines.launch
 import java.util.Locale
 
 class MovieTrailerPresenterImpl(
-  private var movieTrailerView: MovieTrailerView? = null,
-  private var movieTrailerModel: MovieTrailerModel? = null,
+  private var movieTrailerView: MovieTrailerContract.MovieTrailerView? = null,
+  private var movieTrailerModel: MovieTrailerContract.MovieTrailerModel? = null,
   private val scope: CoroutineScope
-): MovieTrailerPresenter {
+): MovieTrailerContract.MovieTrailerPresenter {
 
   private var _movieId = -1
 

@@ -1,12 +1,12 @@
-package com.dpfht.tmdbcleanmvp.feature.moviereviews.adapter
+package com.dpfht.tmdbcleanmvp.feature_movie_reviews.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.dpfht.tmdbcleanmvp.R
-import com.dpfht.tmdbcleanmvp.databinding.RowReviewBinding
 import com.dpfht.tmdbcleanmvp.domain.entity.ReviewEntity
+import com.dpfht.tmdbcleanmvp.feature_movie_reviews.databinding.RowReviewBinding
+import com.dpfht.tmdbcleanmvp.framework.R as FrameworkR
 
 class MovieReviewsAdapter(private val reviews: ArrayList<ReviewEntity>): RecyclerView.Adapter<MovieReviewsAdapter.ReviewHolder>() {
 
@@ -37,7 +37,7 @@ class MovieReviewsAdapter(private val reviews: ArrayList<ReviewEntity>): Recycle
             if (!imageUrl.isNullOrEmpty()) {
                 Glide.with(binding.ivAuthor.context)
                     .load(imageUrl)
-                    .placeholder(R.mipmap.ic_launcher)
+                    .placeholder(FrameworkR.mipmap.ic_launcher)
                     .into(binding.ivAuthor)
             }
         }

@@ -1,8 +1,5 @@
-package com.dpfht.tmdbcleanmvp.feature.moviereviews
+package com.dpfht.tmdbcleanmvp.feature_movie_reviews
 
-import com.dpfht.tmdbcleanmvp.feature.moviereviews.MovieReviewsContract.MovieReviewsModel
-import com.dpfht.tmdbcleanmvp.feature.moviereviews.MovieReviewsContract.MovieReviewsPresenter
-import com.dpfht.tmdbcleanmvp.feature.moviereviews.MovieReviewsContract.MovieReviewsView
 import com.dpfht.tmdbcleanmvp.domain.entity.Result.Success
 import com.dpfht.tmdbcleanmvp.domain.entity.Result.Error
 import com.dpfht.tmdbcleanmvp.domain.entity.ReviewEntity
@@ -14,12 +11,12 @@ import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 
 class MovieReviewsPresenterImpl(
-  private var movieReviewsView: MovieReviewsView? = null,
-  private var movieReviewsModel: MovieReviewsModel? = null,
+  private var movieReviewsView: MovieReviewsContract.MovieReviewsView? = null,
+  private var movieReviewsModel: MovieReviewsContract.MovieReviewsModel? = null,
   private val reviews: ArrayList<ReviewEntity>,
   private val scope: CoroutineScope,
   private val navigationService: NavigationService
-): MovieReviewsPresenter {
+): MovieReviewsContract.MovieReviewsPresenter {
 
   private var _isLoadingData = false
   private var _movieId = -1

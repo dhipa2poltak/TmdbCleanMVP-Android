@@ -1,4 +1,4 @@
-package com.dpfht.tmdbcleanmvp.feature.moviereviews
+package com.dpfht.tmdbcleanmvp.feature_movie_reviews
 
 import android.content.Context
 import android.os.Bundle
@@ -7,24 +7,22 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.dpfht.tmdbcleanmvp.R
-import com.dpfht.tmdbcleanmvp.TheApplication
-import com.dpfht.tmdbcleanmvp.databinding.FragmentMovieReviewsBinding
-import com.dpfht.tmdbcleanmvp.feature.moviereviews.MovieReviewsContract.MovieReviewsPresenter
-import com.dpfht.tmdbcleanmvp.feature.moviereviews.MovieReviewsContract.MovieReviewsView
-import com.dpfht.tmdbcleanmvp.feature.moviereviews.adapter.MovieReviewsAdapter
-import com.dpfht.tmdbcleanmvp.feature.moviereviews.di.DaggerMovieReviewsComponent
-import com.dpfht.tmdbcleanmvp.feature.moviereviews.di.MovieReviewsModule
+import com.dpfht.tmdbcleanmvp.feature_movie_reviews.adapter.MovieReviewsAdapter
+import com.dpfht.tmdbcleanmvp.feature_movie_reviews.databinding.FragmentMovieReviewsBinding
+import com.dpfht.tmdbcleanmvp.feature_movie_reviews.di.DaggerMovieReviewsComponent
+import com.dpfht.tmdbcleanmvp.feature_movie_reviews.di.MovieReviewsModule
 import com.dpfht.tmdbcleanmvp.framework.base.BaseFragment
+import com.dpfht.tmdbcleanmvp.framework.di.provider.ApplicationComponentProvider
 import com.dpfht.tmdbcleanmvp.framework.di.provider.NavigationComponentProvider
 import javax.inject.Inject
+import com.dpfht.tmdbcleanmvp.framework.R as FrameworkR
 
-class MovieReviewsFragment : BaseFragment(), MovieReviewsView {
+class MovieReviewsFragment : BaseFragment(), MovieReviewsContract.MovieReviewsView {
 
   private lateinit var binding: FragmentMovieReviewsBinding
 
   @Inject
-  lateinit var presenter: MovieReviewsPresenter
+  lateinit var presenter: MovieReviewsContract.MovieReviewsPresenter
 
   @Inject
   lateinit var adapter: MovieReviewsAdapter
@@ -36,7 +34,7 @@ class MovieReviewsFragment : BaseFragment(), MovieReviewsView {
       .builder()
       .movieReviewsModule(MovieReviewsModule(this))
       .navigationComponent((requireActivity() as NavigationComponentProvider).provideNavigationComponent())
-      .applicationComponent(TheApplication.instance.applicationComponent)
+      .applicationComponent((requireActivity().application as ApplicationComponentProvider).provideApplicationComponent())
       .build()
 
     movieReviewsComponent.inject(this)
@@ -107,6 +105,6 @@ class MovieReviewsFragment : BaseFragment(), MovieReviewsView {
   }
 
   override fun showCanceledMessage() {
-    showErrorMessage(getString(R.string.canceled_message))
+    showErrorMessage(getString(FrameworkR.string.canceled_message))
   }
 }

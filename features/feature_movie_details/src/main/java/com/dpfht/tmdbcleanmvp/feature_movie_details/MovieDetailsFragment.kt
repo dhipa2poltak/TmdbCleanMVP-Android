@@ -70,7 +70,7 @@ class MovieDetailsFragment : BaseFragment(), MovieDetailsContract.MovieDetailsVi
     if (imageUrl.isNotEmpty()) {
       Glide.with(requireContext())
         .load(imageUrl)
-        .placeholder(R.mipmap.ic_launcher)
+        .placeholder(FrameworkR.mipmap.ic_launcher)
         .into(binding.ivImageMovie)
     }
   }

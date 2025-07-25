@@ -1,4 +1,4 @@
-package com.dpfht.tmdbcleanmvp.feature.moviereviews
+package com.dpfht.tmdbcleanmvp.feature_movie_reviews
 
 import com.dpfht.tmdbcleanmvp.domain.entity.Result
 import com.dpfht.tmdbcleanmvp.domain.entity.ReviewDomain

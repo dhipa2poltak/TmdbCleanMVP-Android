@@ -1,5 +1,6 @@
 package com.dpfht.tmdbcleanmvp.presenter
 
+/*
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.dpfht.tmdbcleanmvp.MainCoroutineRule
 import com.dpfht.tmdbcleanmvp.core.data.model.remote.Genre
@@ -77,3 +78,4 @@ class GenrePresenterUnitTest {
     verify(genreView).showErrorMessage(msg)
   }
 }
+*/

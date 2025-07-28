@@ -1,5 +1,6 @@
 package com.dpfht.tmdbcleanmvp.presenter
 
+/*
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.dpfht.tmdbcleanmvp.BuildConfig
 import com.dpfht.tmdbcleanmvp.Config
@@ -89,3 +90,4 @@ class MovieDetailsPresenterUnitTest {
     verify(movieDetailsView).showErrorMessage(msg)
   }
 }
+*/

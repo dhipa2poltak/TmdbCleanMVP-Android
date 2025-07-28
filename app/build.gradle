@@ -91,6 +91,7 @@ dependencies {
   implementation fileTree(dir: "libs", include: ["*.jar"])
   implementation project(':framework')
   implementation project(":navigation")
+  implementation project(":features:feature_movie_trailer")
 
   implementation 'androidx.core:core-ktx:1.9.0'
   implementation 'androidx.appcompat:appcompat:1.6.1'

@@ -30,7 +30,15 @@ class MovieReviewsAdapter(private val reviews: ArrayList<ReviewEntity>): Recycle
             binding.tvAuthor.text = review.author
             binding.tvContent.text = review.content
 
-            var imageUrl = review.authorDetails?.avatarPath
+            val imageUrl = review.authorDetails?.avatarPath
+            if (imageUrl != null && imageUrl.isNotEmpty()) {
+                Glide.with(binding.ivAuthor.context)
+                    .load(imageUrl)
+                    .placeholder(FrameworkR.mipmap.ic_launcher)
+                    .into(binding.ivAuthor)
+            }
+
+            /*
             if (imageUrl?.startsWith("/") == true) {
                 imageUrl = imageUrl.replaceFirst("/", "")
             }
@@ -40,6 +48,7 @@ class MovieReviewsAdapter(private val reviews: ArrayList<ReviewEntity>): Recycle
                     .placeholder(FrameworkR.mipmap.ic_launcher)
                     .into(binding.ivAuthor)
             }
+            */
         }
     }
 }

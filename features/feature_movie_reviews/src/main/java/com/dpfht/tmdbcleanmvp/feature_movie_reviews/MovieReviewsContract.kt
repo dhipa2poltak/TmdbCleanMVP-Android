@@ -9,6 +9,7 @@ interface MovieReviewsContract {
 
   interface MovieReviewsView: BaseView {
     fun notifyItemInserted(position: Int)
+    fun showEmptyReview(isEmpty: Boolean)
   }
 
   interface MovieReviewsPresenter: BasePresenter {

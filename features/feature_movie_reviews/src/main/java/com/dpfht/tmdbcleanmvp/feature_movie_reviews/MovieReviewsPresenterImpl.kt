@@ -64,6 +64,10 @@ class MovieReviewsPresenterImpl(
         movieReviewsView?.notifyItemInserted(this.reviews.size - 1)
       }
     } else {
+      if (this@MovieReviewsPresenterImpl.reviews.isEmpty()) {
+        movieReviewsView?.showEmptyReview(true)
+      }
+
       isNextEmptyDataResponse = true
     }
 

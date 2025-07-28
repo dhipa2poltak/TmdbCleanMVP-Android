@@ -2,24 +2,19 @@ package com.dpfht.tmdbcleanmvp.feature_movie_reviews
 
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dpfht.tmdbcleanmvp.feature_movie_reviews.adapter.MovieReviewsAdapter
 import com.dpfht.tmdbcleanmvp.feature_movie_reviews.databinding.FragmentMovieReviewsBinding
 import com.dpfht.tmdbcleanmvp.feature_movie_reviews.di.DaggerMovieReviewsComponent
 import com.dpfht.tmdbcleanmvp.feature_movie_reviews.di.MovieReviewsModule
-import com.dpfht.tmdbcleanmvp.framework.base.BaseFragment
+import com.dpfht.tmdbcleanmvp.framework.base.BaseFragmentNew
 import com.dpfht.tmdbcleanmvp.framework.di.provider.ApplicationComponentProvider
 import com.dpfht.tmdbcleanmvp.framework.di.provider.NavigationComponentProvider
 import javax.inject.Inject
-import com.dpfht.tmdbcleanmvp.framework.R as FrameworkR
 
-class MovieReviewsFragment : BaseFragment(), MovieReviewsContract.MovieReviewsView {
-
-  private lateinit var binding: FragmentMovieReviewsBinding
+class MovieReviewsFragment : BaseFragmentNew<FragmentMovieReviewsBinding>(R.layout.fragment_movie_reviews), MovieReviewsContract.MovieReviewsView {
 
   @Inject
   lateinit var presenter: MovieReviewsContract.MovieReviewsPresenter
@@ -38,15 +33,6 @@ class MovieReviewsFragment : BaseFragment(), MovieReviewsContract.MovieReviewsVi
       .build()
 
     movieReviewsComponent.inject(this)
-  }
-
-  override fun onCreateView(
-    inflater: LayoutInflater, container: ViewGroup?,
-    savedInstanceState: Bundle?
-  ): View {
-    binding = FragmentMovieReviewsBinding.inflate(inflater, container, false)
-
-    return binding.root
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -82,6 +68,16 @@ class MovieReviewsFragment : BaseFragment(), MovieReviewsContract.MovieReviewsVi
     }
   }
 
+  override fun showEmptyReview(isEmpty: Boolean) {
+    with(binding) {
+      tvNoReview.visibility = if (isEmpty) {
+        View.VISIBLE
+      } else {
+        View.GONE
+      }
+    }
+  }
+
   override fun notifyItemInserted(position: Int) {
     adapter.notifyItemInserted(position)
   }
@@ -92,19 +88,14 @@ class MovieReviewsFragment : BaseFragment(), MovieReviewsContract.MovieReviewsVi
   }
 
   override fun showLoadingDialog() {
-    prgDialog.show()
+    loadingView.visibility = View.VISIBLE
   }
 
   override fun hideLoadingDialog() {
-    prgDialog.dismiss()
+    loadingView.visibility = View.GONE
   }
 
-  override fun showErrorMessage(message: String) {
-    //val navDirections = MovieReviewsFragmentDirections.actionMovieReviewsToErrorDialog(message)
-    //Navigation.findNavController(requireView()).navigate(navDirections)
-  }
+  override fun showErrorMessage(message: String) {}
 
-  override fun showCanceledMessage() {
-    showErrorMessage(getString(FrameworkR.string.canceled_message))
-  }
+  override fun showCanceledMessage() {}
 }

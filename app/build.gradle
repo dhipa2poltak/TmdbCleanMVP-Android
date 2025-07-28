@@ -5,6 +5,7 @@ plugins {
 }
 
 android {
+  /*
   signingConfigs {
     release {
       storeFile file('/Users/user/Documents/mykeystores/tmdb.keystore')
@@ -13,6 +14,7 @@ android {
       keyPassword 'tmdb1234'
     }
   }
+  */
 
   namespace = "com.dpfht.tmdbcleanmvp"
   compileSdk ConfigData.compileSdkVersion
@@ -34,7 +36,7 @@ android {
       shrinkResources true
       proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
 
-      signingConfig signingConfigs.release
+      //signingConfig signingConfigs.release
 
       manifestPlaceholders.appNameSuffix = ""
     }

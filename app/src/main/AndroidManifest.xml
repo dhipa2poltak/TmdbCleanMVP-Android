@@ -14,10 +14,12 @@
       android:theme="@style/Theme.DemoTMDB">
     <activity
         android:name="com.dpfht.tmdbcleanmvp.feature_movie_trailer.MovieTrailerActivity"
-        android:exported="false" />
+        android:exported="false"
+        android:screenOrientation="portrait" />
     <activity
         android:name="com.dpfht.tmdbcleanmvp.MainActivity"
-        android:exported="true">
+        android:exported="true"
+        android:screenOrientation="portrait">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
 

@@ -2,7 +2,6 @@ package com.dpfht.tmdbcleanmvp.feature_movie_details
 
 import com.dpfht.tmdbcleanmvp.domain.entity.Result.Success
 import com.dpfht.tmdbcleanmvp.domain.entity.Result.Error
-import com.dpfht.tmdbcleanmvp.framework.BuildConfig
 import com.dpfht.tmdbcleanmvp.framework.navigation.NavigationService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -59,20 +58,12 @@ class MovieDetailsPresenterImpl(
   }
 
   private fun onSuccess(pMovieId: Int, pTitle: String, pOverview: String, pPosterPath: String) {
-    imageUrl = ""
-    if (pPosterPath.isNotEmpty()) {
-      //-- disini
-      //imageUrl = BuildConfig.IMAGE_URL_BASE_PATH + pPosterPath
-    }
-
+    imageUrl = pPosterPath
     _movieId = pMovieId
     title = pTitle
     overview = pOverview
-    movieDetailsView?.showMovieDetails(
-      title,
-      overview,
-      imageUrl)
 
+    movieDetailsView?.showMovieDetails(title, overview, imageUrl)
     movieDetailsView?.hideLoadingDialog()
   }
 

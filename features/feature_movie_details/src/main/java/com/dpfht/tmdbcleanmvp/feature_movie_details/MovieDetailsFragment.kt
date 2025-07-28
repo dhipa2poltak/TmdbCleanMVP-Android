@@ -2,22 +2,18 @@ package com.dpfht.tmdbcleanmvp.feature_movie_details
 
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.dpfht.tmdbcleanmvp.feature_movie_details.databinding.FragmentMovieDetailsBinding
 import com.dpfht.tmdbcleanmvp.feature_movie_details.di.DaggerMovieDetailsComponent
 import com.dpfht.tmdbcleanmvp.feature_movie_details.di.MovieDetailsModule
-import com.dpfht.tmdbcleanmvp.framework.base.BaseFragment
+import com.dpfht.tmdbcleanmvp.framework.base.BaseFragmentNew
 import com.dpfht.tmdbcleanmvp.framework.di.provider.ApplicationComponentProvider
 import com.dpfht.tmdbcleanmvp.framework.di.provider.NavigationComponentProvider
 import javax.inject.Inject
 import com.dpfht.tmdbcleanmvp.framework.R as FrameworkR
 
-class MovieDetailsFragment : BaseFragment(), MovieDetailsContract.MovieDetailsView {
-
-  private lateinit var binding: FragmentMovieDetailsBinding
+class MovieDetailsFragment : BaseFragmentNew<FragmentMovieDetailsBinding>(R.layout.fragment_movie_details), MovieDetailsContract.MovieDetailsView {
 
   @Inject
   lateinit var presenter: MovieDetailsContract.MovieDetailsPresenter
@@ -33,15 +29,6 @@ class MovieDetailsFragment : BaseFragment(), MovieDetailsContract.MovieDetailsVi
       .build()
 
     movieDetailsComponent.inject(this)
-  }
-
-  override fun onCreateView(
-    inflater: LayoutInflater, container: ViewGroup?,
-    savedInstanceState: Bundle?
-  ): View {
-    binding = FragmentMovieDetailsBinding.inflate(inflater, container, false)
-
-    return binding.root
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -89,19 +76,14 @@ class MovieDetailsFragment : BaseFragment(), MovieDetailsContract.MovieDetailsVi
   }
 
   override fun showLoadingDialog() {
-    prgDialog.show()
+    loadingView.visibility = View.VISIBLE
   }
 
   override fun hideLoadingDialog() {
-    prgDialog.dismiss()
+    loadingView.visibility = View.GONE
   }
 
-  override fun showErrorMessage(message: String) {
-    //val navDirections = MovieDetailsFragmentDirections.actionMovieDetailsToErrorDialog(message)
-    //Navigation.findNavController(requireView()).navigate(navDirections)
-  }
+  override fun showErrorMessage(message: String) {}
 
-  override fun showCanceledMessage() {
-    showErrorMessage(getString(FrameworkR.string.canceled_message))
-  }
+  override fun showCanceledMessage() {}
 }

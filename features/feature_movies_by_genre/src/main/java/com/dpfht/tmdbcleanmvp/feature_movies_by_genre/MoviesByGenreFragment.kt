@@ -2,24 +2,19 @@ package com.dpfht.tmdbcleanmvp.feature_movies_by_genre
 
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dpfht.tmdbcleanmvp.feature_movies_by_genre.adapter.MoviesByGenreAdapter
 import com.dpfht.tmdbcleanmvp.feature_movies_by_genre.databinding.FragmentMoviesByGenreBinding
 import com.dpfht.tmdbcleanmvp.feature_movies_by_genre.di.DaggerMoviesByGenreComponent
 import com.dpfht.tmdbcleanmvp.feature_movies_by_genre.di.MoviesByGenreModule
-import com.dpfht.tmdbcleanmvp.framework.base.BaseFragment
+import com.dpfht.tmdbcleanmvp.framework.base.BaseFragmentNew
 import com.dpfht.tmdbcleanmvp.framework.di.provider.ApplicationComponentProvider
 import com.dpfht.tmdbcleanmvp.framework.di.provider.NavigationComponentProvider
 import javax.inject.Inject
-import com.dpfht.tmdbcleanmvp.framework.R as FrameworkR;
 
-class MoviesByGenreFragment : BaseFragment(), MoviesByGenreContract.MoviesByGenreView {
-
-  private lateinit var binding: FragmentMoviesByGenreBinding
+class MoviesByGenreFragment : BaseFragmentNew<FragmentMoviesByGenreBinding>(R.layout.fragment_movies_by_genre), MoviesByGenreContract.MoviesByGenreView {
 
   @Inject
   lateinit var presenter: MoviesByGenreContract.MoviesByGenrePresenter
@@ -38,15 +33,6 @@ class MoviesByGenreFragment : BaseFragment(), MoviesByGenreContract.MoviesByGenr
       .build()
 
     moviesByGenreComponent.inject(this)
-  }
-
-  override fun onCreateView(
-    inflater: LayoutInflater, container: ViewGroup?,
-    savedInstanceState: Bundle?
-  ): View {
-    binding = FragmentMoviesByGenreBinding.inflate(inflater, container, false)
-
-    return binding.root
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -99,19 +85,14 @@ class MoviesByGenreFragment : BaseFragment(), MoviesByGenreContract.MoviesByGenr
   }
 
   override fun showLoadingDialog() {
-    prgDialog.show()
+    loadingView.visibility = View.VISIBLE
   }
 
   override fun hideLoadingDialog() {
-    prgDialog.dismiss()
+    loadingView.visibility = View.GONE
   }
 
-  override fun showErrorMessage(message: String) {
-    //val navDirections = MoviesByGenreFragmentDirections.actionMovieByGenreToErrorDialog(message)
-    //Navigation.findNavController(requireView()).navigate(navDirections)
-  }
+  override fun showErrorMessage(message: String) {}
 
-  override fun showCanceledMessage() {
-    showErrorMessage(getString(FrameworkR.string.canceled_message))
-  }
+  override fun showCanceledMessage() {}
 }

@@ -2,23 +2,18 @@ package com.dpfht.tmdbcleanmvp.feature_genre
 
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dpfht.tmdbcleanmvp.feature_genre.adapter.GenreAdapter
 import com.dpfht.tmdbcleanmvp.feature_genre.databinding.FragmentGenreBinding
 import com.dpfht.tmdbcleanmvp.feature_genre.di.DaggerGenreComponent
 import com.dpfht.tmdbcleanmvp.feature_genre.di.GenreModule
-import com.dpfht.tmdbcleanmvp.framework.base.BaseFragment
+import com.dpfht.tmdbcleanmvp.framework.base.BaseFragmentNew
 import com.dpfht.tmdbcleanmvp.framework.di.provider.ApplicationComponentProvider
 import com.dpfht.tmdbcleanmvp.framework.di.provider.NavigationComponentProvider
 import javax.inject.Inject
-import com.dpfht.tmdbcleanmvp.framework.R as FrameworkR
 
-class GenreFragment : BaseFragment(), GenreContract.GenreView {
-
-  private lateinit var binding: FragmentGenreBinding
+class GenreFragment : BaseFragmentNew<FragmentGenreBinding>(R.layout.fragment_genre), GenreContract.GenreView {
 
   @Inject
   lateinit var presenter: GenreContract.GenrePresenter
@@ -37,15 +32,6 @@ class GenreFragment : BaseFragment(), GenreContract.GenreView {
       .build()
 
     genreComponent.inject(this)
-  }
-
-  override fun onCreateView(
-    inflater: LayoutInflater, container: ViewGroup?,
-    savedInstanceState: Bundle?
-  ): View {
-    binding = FragmentGenreBinding.inflate(inflater, container, false)
-
-    return binding.root
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -76,19 +62,14 @@ class GenreFragment : BaseFragment(), GenreContract.GenreView {
   }
 
   override fun showLoadingDialog() {
-    prgDialog.show()
+    loadingView.visibility = View.VISIBLE
   }
 
   override fun hideLoadingDialog() {
-    prgDialog.dismiss()
+    loadingView.visibility = View.GONE
   }
 
-  override fun showErrorMessage(message: String) {
-    //val navDirections = GenreFragmentDirections.actionGenreFragmentToErrorDialog(message)
-    //Navigation.findNavController(requireView()).navigate(navDirections)
-  }
+  override fun showErrorMessage(message: String) {}
 
-  override fun showCanceledMessage() {
-    showErrorMessage(getString(FrameworkR.string.canceled_message))
-  }
+  override fun showCanceledMessage() {}
 }

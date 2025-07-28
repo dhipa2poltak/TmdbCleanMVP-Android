@@ -8,9 +8,9 @@
       android:name="com.dpfht.tmdbcleanmvp.TheApplication"
       android:allowBackup="false"
       android:fullBackupContent="false"
-      android:icon="@mipmap/ic_launcher"
+      android:icon="@drawable/ic_app_launcher"
       android:label="${appName}${appNameSuffix}"
-      android:roundIcon="@mipmap/ic_launcher_round"
+      android:roundIcon="@drawable/ic_app_launcher"
       android:supportsRtl="true"
       android:theme="@style/Theme.DemoTMDB">
     <activity

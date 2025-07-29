@@ -3,6 +3,7 @@ package com.dpfht.tmdbcleanmvp.feature_movies_by_genre
 import com.dpfht.tmdbcleanmvp.domain.entity.MovieEntity
 import com.dpfht.tmdbcleanmvp.domain.entity.Result.Success
 import com.dpfht.tmdbcleanmvp.domain.entity.Result.Error
+import com.dpfht.tmdbcleanmvp.domain.usecase.GetMovieByGenreUseCase
 import com.dpfht.tmdbcleanmvp.framework.navigation.NavigationService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -12,7 +13,7 @@ import kotlinx.coroutines.launch
 
 class MoviesByGenrePresenterImpl(
   private var moviesByGenreView: MoviesByGenreContract.MoviesByGenreView? = null,
-  private var moviesByGenreModel: MoviesByGenreContract.MoviesByGenreModel? = null,
+  private val getMovieByGenreUseCase: GetMovieByGenreUseCase,
   private val movies: ArrayList<MovieEntity>,
   private val scope: CoroutineScope,
   private val navigationService: NavigationService
@@ -42,14 +43,12 @@ class MoviesByGenrePresenterImpl(
       moviesByGenreView?.showLoadingDialog()
       _isLoadingData = true
 
-      moviesByGenreModel?.let {
-        when (val result = it.getMoviesByGenre(_genreId, page + 1)) {
-          is Success -> {
-            onSuccess(result.value.results, result.value.page)
-          }
-          is Error -> {
-            onError(result.message)
-          }
+      when (val result = getMovieByGenreUseCase(_genreId, page + 1)) {
+        is Success -> {
+          onSuccess(result.value.results, result.value.page)
+        }
+        is Error -> {
+          onError(result.message)
         }
       }
     }

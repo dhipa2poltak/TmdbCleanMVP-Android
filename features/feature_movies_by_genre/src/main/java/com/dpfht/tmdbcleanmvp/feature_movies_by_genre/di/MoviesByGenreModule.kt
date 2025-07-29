@@ -11,7 +11,6 @@ import com.dpfht.tmdbcleanmvp.domain.usecase.GetMovieByGenreUseCase
 import com.dpfht.tmdbcleanmvp.domain.usecase.GetMovieByGenreUseCaseImpl
 import com.dpfht.tmdbcleanmvp.feature_movies_by_genre.MoviesByGenreContract
 import com.dpfht.tmdbcleanmvp.feature_movies_by_genre.MoviesByGenreFragment
-import com.dpfht.tmdbcleanmvp.feature_movies_by_genre.MoviesByGenreModelImpl
 import com.dpfht.tmdbcleanmvp.feature_movies_by_genre.MoviesByGenrePresenterImpl
 import com.dpfht.tmdbcleanmvp.feature_movies_by_genre.adapter.MoviesByGenreAdapter
 import com.dpfht.tmdbcleanmvp.framework.navigation.NavigationService
@@ -49,12 +48,6 @@ class MoviesByGenreModule(private val moviesByGenreFragment: MoviesByGenreFragme
 
   @Provides
   @FragmentScope
-  fun provideMoviesByGenreModel(getMovieByGenreUseCase: GetMovieByGenreUseCase): MoviesByGenreContract.MoviesByGenreModel {
-    return MoviesByGenreModelImpl(getMovieByGenreUseCase)
-  }
-
-  @Provides
-  @FragmentScope
   fun provideMovies(): ArrayList<MovieEntity> {
     return arrayListOf()
   }
@@ -63,12 +56,12 @@ class MoviesByGenreModule(private val moviesByGenreFragment: MoviesByGenreFragme
   @FragmentScope
   fun provideMoviesByGenrePresenter(
     moviesByGenreView: MoviesByGenreContract.MoviesByGenreView,
-    moviesByGenreModel: MoviesByGenreContract.MoviesByGenreModel,
+    getMovieByGenreUseCase: GetMovieByGenreUseCase,
     movies: ArrayList<MovieEntity>,
     scope: CoroutineScope,
     navigationService: NavigationService
   ): MoviesByGenreContract.MoviesByGenrePresenter {
-    return MoviesByGenrePresenterImpl(moviesByGenreView, moviesByGenreModel, movies, scope, navigationService)
+    return MoviesByGenrePresenterImpl(moviesByGenreView, getMovieByGenreUseCase, movies, scope, navigationService)
   }
 
   @Provides

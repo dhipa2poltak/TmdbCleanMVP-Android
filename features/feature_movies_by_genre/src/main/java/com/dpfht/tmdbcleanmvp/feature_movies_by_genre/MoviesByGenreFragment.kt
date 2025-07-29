@@ -9,12 +9,12 @@ import com.dpfht.tmdbcleanmvp.feature_movies_by_genre.adapter.MoviesByGenreAdapt
 import com.dpfht.tmdbcleanmvp.feature_movies_by_genre.databinding.FragmentMoviesByGenreBinding
 import com.dpfht.tmdbcleanmvp.feature_movies_by_genre.di.DaggerMoviesByGenreComponent
 import com.dpfht.tmdbcleanmvp.feature_movies_by_genre.di.MoviesByGenreModule
-import com.dpfht.tmdbcleanmvp.framework.base.BaseFragmentNew
+import com.dpfht.tmdbcleanmvp.framework.base.BaseFragment
 import com.dpfht.tmdbcleanmvp.framework.di.provider.ApplicationComponentProvider
 import com.dpfht.tmdbcleanmvp.framework.di.provider.NavigationComponentProvider
 import javax.inject.Inject
 
-class MoviesByGenreFragment : BaseFragmentNew<FragmentMoviesByGenreBinding>(R.layout.fragment_movies_by_genre), MoviesByGenreContract.MoviesByGenreView {
+class MoviesByGenreFragment : BaseFragment<FragmentMoviesByGenreBinding>(R.layout.fragment_movies_by_genre), MoviesByGenreContract.MoviesByGenreView {
 
   @Inject
   lateinit var presenter: MoviesByGenreContract.MoviesByGenrePresenter

@@ -9,12 +9,12 @@ import com.dpfht.tmdbcleanmvp.feature_movie_reviews.adapter.MovieReviewsAdapter
 import com.dpfht.tmdbcleanmvp.feature_movie_reviews.databinding.FragmentMovieReviewsBinding
 import com.dpfht.tmdbcleanmvp.feature_movie_reviews.di.DaggerMovieReviewsComponent
 import com.dpfht.tmdbcleanmvp.feature_movie_reviews.di.MovieReviewsModule
-import com.dpfht.tmdbcleanmvp.framework.base.BaseFragmentNew
+import com.dpfht.tmdbcleanmvp.framework.base.BaseFragment
 import com.dpfht.tmdbcleanmvp.framework.di.provider.ApplicationComponentProvider
 import com.dpfht.tmdbcleanmvp.framework.di.provider.NavigationComponentProvider
 import javax.inject.Inject
 
-class MovieReviewsFragment : BaseFragmentNew<FragmentMovieReviewsBinding>(R.layout.fragment_movie_reviews), MovieReviewsContract.MovieReviewsView {
+class MovieReviewsFragment : BaseFragment<FragmentMovieReviewsBinding>(R.layout.fragment_movie_reviews), MovieReviewsContract.MovieReviewsView {
 
   @Inject
   lateinit var presenter: MovieReviewsContract.MovieReviewsPresenter

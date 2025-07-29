@@ -7,13 +7,13 @@ import com.bumptech.glide.Glide
 import com.dpfht.tmdbcleanmvp.feature_movie_details.databinding.FragmentMovieDetailsBinding
 import com.dpfht.tmdbcleanmvp.feature_movie_details.di.DaggerMovieDetailsComponent
 import com.dpfht.tmdbcleanmvp.feature_movie_details.di.MovieDetailsModule
-import com.dpfht.tmdbcleanmvp.framework.base.BaseFragmentNew
+import com.dpfht.tmdbcleanmvp.framework.base.BaseFragment
 import com.dpfht.tmdbcleanmvp.framework.di.provider.ApplicationComponentProvider
 import com.dpfht.tmdbcleanmvp.framework.di.provider.NavigationComponentProvider
 import javax.inject.Inject
 import com.dpfht.tmdbcleanmvp.framework.R as FrameworkR
 
-class MovieDetailsFragment : BaseFragmentNew<FragmentMovieDetailsBinding>(R.layout.fragment_movie_details), MovieDetailsContract.MovieDetailsView {
+class MovieDetailsFragment : BaseFragment<FragmentMovieDetailsBinding>(R.layout.fragment_movie_details), MovieDetailsContract.MovieDetailsView {
 
   @Inject
   lateinit var presenter: MovieDetailsContract.MovieDetailsPresenter

@@ -8,12 +8,12 @@ import com.dpfht.tmdbcleanmvp.feature_genre.adapter.GenreAdapter
 import com.dpfht.tmdbcleanmvp.feature_genre.databinding.FragmentGenreBinding
 import com.dpfht.tmdbcleanmvp.feature_genre.di.DaggerGenreComponent
 import com.dpfht.tmdbcleanmvp.feature_genre.di.GenreModule
-import com.dpfht.tmdbcleanmvp.framework.base.BaseFragmentNew
+import com.dpfht.tmdbcleanmvp.framework.base.BaseFragment
 import com.dpfht.tmdbcleanmvp.framework.di.provider.ApplicationComponentProvider
 import com.dpfht.tmdbcleanmvp.framework.di.provider.NavigationComponentProvider
 import javax.inject.Inject
 
-class GenreFragment : BaseFragmentNew<FragmentGenreBinding>(R.layout.fragment_genre), GenreContract.GenreView {
+class GenreFragment : BaseFragment<FragmentGenreBinding>(R.layout.fragment_genre), GenreContract.GenreView {
 
   @Inject
   lateinit var presenter: GenreContract.GenrePresenter

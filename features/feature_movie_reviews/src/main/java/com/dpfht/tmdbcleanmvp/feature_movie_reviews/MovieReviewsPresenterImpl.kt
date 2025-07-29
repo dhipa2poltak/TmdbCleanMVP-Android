@@ -3,6 +3,7 @@ package com.dpfht.tmdbcleanmvp.feature_movie_reviews
 import com.dpfht.tmdbcleanmvp.domain.entity.Result.Success
 import com.dpfht.tmdbcleanmvp.domain.entity.Result.Error
 import com.dpfht.tmdbcleanmvp.domain.entity.ReviewEntity
+import com.dpfht.tmdbcleanmvp.domain.usecase.GetMovieReviewUseCase
 import com.dpfht.tmdbcleanmvp.framework.navigation.NavigationService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -12,7 +13,7 @@ import kotlinx.coroutines.launch
 
 class MovieReviewsPresenterImpl(
   private var movieReviewsView: MovieReviewsContract.MovieReviewsView? = null,
-  private var movieReviewsModel: MovieReviewsContract.MovieReviewsModel? = null,
+  private val getMovieReviewUseCase: GetMovieReviewUseCase,
   private val reviews: ArrayList<ReviewEntity>,
   private val scope: CoroutineScope,
   private val navigationService: NavigationService
@@ -42,14 +43,12 @@ class MovieReviewsPresenterImpl(
       movieReviewsView?.showLoadingDialog()
       _isLoadingData = true
 
-      movieReviewsModel?.let {
-        when (val result = it.getMovieReviews(_movieId, page + 1)) {
-          is Success -> {
-            onSuccess(result.value.results, result.value.page)
-          }
-          is Error -> {
-            onError(result.message)
-          }
+      when (val result = getMovieReviewUseCase(_movieId, page + 1)) {
+        is Success -> {
+          onSuccess(result.value.results, result.value.page)
+        }
+        is Error -> {
+          onError(result.message)
         }
       }
     }

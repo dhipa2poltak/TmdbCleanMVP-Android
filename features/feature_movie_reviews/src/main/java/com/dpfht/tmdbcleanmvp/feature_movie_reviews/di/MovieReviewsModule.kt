@@ -11,7 +11,6 @@ import com.dpfht.tmdbcleanmvp.domain.usecase.GetMovieReviewUseCase
 import com.dpfht.tmdbcleanmvp.domain.usecase.GetMovieReviewUseCaseImpl
 import com.dpfht.tmdbcleanmvp.feature_movie_reviews.MovieReviewsContract
 import com.dpfht.tmdbcleanmvp.feature_movie_reviews.MovieReviewsFragment
-import com.dpfht.tmdbcleanmvp.feature_movie_reviews.MovieReviewsModelImpl
 import com.dpfht.tmdbcleanmvp.feature_movie_reviews.MovieReviewsPresenterImpl
 import com.dpfht.tmdbcleanmvp.feature_movie_reviews.adapter.MovieReviewsAdapter
 import com.dpfht.tmdbcleanmvp.framework.navigation.NavigationService
@@ -49,12 +48,6 @@ class MovieReviewsModule(private val movieReviewsFragment: MovieReviewsFragment)
 
   @Provides
   @FragmentScope
-  fun provideMovieReviewsModel(getMovieReviewUseCase: GetMovieReviewUseCase): MovieReviewsContract.MovieReviewsModel {
-    return MovieReviewsModelImpl(getMovieReviewUseCase)
-  }
-
-  @Provides
-  @FragmentScope
   fun provideReviews(): ArrayList<ReviewEntity> {
     return arrayListOf()
   }
@@ -63,12 +56,12 @@ class MovieReviewsModule(private val movieReviewsFragment: MovieReviewsFragment)
   @FragmentScope
   fun provideMovieReviewsPresenter(
     movieReviewsView: MovieReviewsContract.MovieReviewsView,
-    movieReviewsModel: MovieReviewsContract.MovieReviewsModel,
+    getMovieReviewUseCase: GetMovieReviewUseCase,
     reviews: ArrayList<ReviewEntity>,
     scope: CoroutineScope,
     navigationService: NavigationService
   ): MovieReviewsContract.MovieReviewsPresenter {
-    return MovieReviewsPresenterImpl(movieReviewsView, movieReviewsModel, reviews, scope, navigationService)
+    return MovieReviewsPresenterImpl(movieReviewsView, getMovieReviewUseCase, reviews, scope, navigationService)
   }
 
   @Provides

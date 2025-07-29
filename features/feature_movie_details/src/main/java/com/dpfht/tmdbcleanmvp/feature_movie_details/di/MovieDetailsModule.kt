@@ -10,7 +10,6 @@ import com.dpfht.tmdbcleanmvp.domain.usecase.GetMovieDetailsUseCase
 import com.dpfht.tmdbcleanmvp.domain.usecase.GetMovieDetailsUseCaseImpl
 import com.dpfht.tmdbcleanmvp.feature_movie_details.MovieDetailsContract
 import com.dpfht.tmdbcleanmvp.feature_movie_details.MovieDetailsFragment
-import com.dpfht.tmdbcleanmvp.feature_movie_details.MovieDetailsModelImpl
 import com.dpfht.tmdbcleanmvp.feature_movie_details.MovieDetailsPresenterImpl
 import com.dpfht.tmdbcleanmvp.framework.navigation.NavigationService
 import dagger.Module
@@ -47,18 +46,12 @@ class MovieDetailsModule(private val movieDetailsFragment: MovieDetailsFragment)
 
   @Provides
   @FragmentScope
-  fun provideMovieDetailsModel(getMovieDetailsUseCase: GetMovieDetailsUseCase): MovieDetailsContract.MovieDetailsModel {
-    return MovieDetailsModelImpl(getMovieDetailsUseCase)
-  }
-
-  @Provides
-  @FragmentScope
   fun provideMovieDetailsPresenter(
     movieDetailsView: MovieDetailsContract.MovieDetailsView,
-    movieDetailsModel: MovieDetailsContract.MovieDetailsModel,
+    getMovieDetailsUseCase: GetMovieDetailsUseCase,
     scope: CoroutineScope,
     navigationService: NavigationService
   ): MovieDetailsContract.MovieDetailsPresenter {
-    return MovieDetailsPresenterImpl(movieDetailsView, movieDetailsModel, scope, navigationService)
+    return MovieDetailsPresenterImpl(movieDetailsView, getMovieDetailsUseCase, scope, navigationService)
   }
 }

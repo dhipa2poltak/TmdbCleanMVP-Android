@@ -2,6 +2,7 @@ package com.dpfht.tmdbcleanmvp.feature_movie_details
 
 import com.dpfht.tmdbcleanmvp.domain.entity.Result.Success
 import com.dpfht.tmdbcleanmvp.domain.entity.Result.Error
+import com.dpfht.tmdbcleanmvp.domain.usecase.GetMovieDetailsUseCase
 import com.dpfht.tmdbcleanmvp.framework.navigation.NavigationService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -11,7 +12,7 @@ import kotlinx.coroutines.launch
 
 class MovieDetailsPresenterImpl(
   private var movieDetailsView: MovieDetailsContract.MovieDetailsView? = null,
-  private var movieDetailsModel: MovieDetailsContract.MovieDetailsModel? = null,
+  private val getMovieDetailsUseCase: GetMovieDetailsUseCase,
   private val scope: CoroutineScope,
   private val navigationService: NavigationService
 ): MovieDetailsContract.MovieDetailsPresenter {
@@ -44,14 +45,12 @@ class MovieDetailsPresenterImpl(
   private fun getMovieDetails() {
     movieDetailsView?.showLoadingDialog()
     scope.launch(Dispatchers.Main) {
-      movieDetailsModel?.let {
-        when (val result = it.getMovieDetails(_movieId)) {
-          is Success -> {
-            onSuccess(result.value.id, result.value.title, result.value.overview, result.value.imageUrl)
-          }
-          is Error -> {
-            onError(result.message)
-          }
+      when (val result = getMovieDetailsUseCase(_movieId)) {
+        is Success -> {
+          onSuccess(result.value.id, result.value.title, result.value.overview, result.value.imageUrl)
+        }
+        is Error -> {
+          onError(result.message)
         }
       }
     }

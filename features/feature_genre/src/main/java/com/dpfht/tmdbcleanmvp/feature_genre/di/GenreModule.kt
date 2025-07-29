@@ -8,7 +8,6 @@ import com.dpfht.tmdbcleanmvp.domain.usecase.GetMovieGenreUseCase
 import com.dpfht.tmdbcleanmvp.domain.usecase.GetMovieGenreUseCaseImpl
 import com.dpfht.tmdbcleanmvp.feature_genre.GenreContract
 import com.dpfht.tmdbcleanmvp.feature_genre.GenreFragment
-import com.dpfht.tmdbcleanmvp.feature_genre.GenreModelImpl
 import com.dpfht.tmdbcleanmvp.feature_genre.GenrePresenterImpl
 import com.dpfht.tmdbcleanmvp.feature_genre.adapter.GenreAdapter
 import com.dpfht.tmdbcleanmvp.framework.di.ActivityContext
@@ -49,12 +48,6 @@ class GenreModule(private val genreFragment: GenreFragment) {
 
   @Provides
   @FragmentScope
-  fun provideGenreModel(getMovieGenreUseCase: GetMovieGenreUseCase): GenreContract.GenreModel {
-    return GenreModelImpl(getMovieGenreUseCase)
-  }
-
-  @Provides
-  @FragmentScope
   fun provideGenres(): ArrayList<GenreEntity> {
     return arrayListOf()
   }
@@ -63,12 +56,12 @@ class GenreModule(private val genreFragment: GenreFragment) {
   @FragmentScope
   fun provideGenrePresenter(
     genreView: GenreContract.GenreView,
-    genreModel: GenreContract.GenreModel,
+    getMovieGenreUseCase: GetMovieGenreUseCase,
     genres: ArrayList<GenreEntity>,
     scope: CoroutineScope,
     navigationService: NavigationService
   ): GenreContract.GenrePresenter {
-    return GenrePresenterImpl(genreView, genreModel, genres, scope, navigationService)
+    return GenrePresenterImpl(genreView, getMovieGenreUseCase, genres, scope, navigationService)
   }
 
   @Provides

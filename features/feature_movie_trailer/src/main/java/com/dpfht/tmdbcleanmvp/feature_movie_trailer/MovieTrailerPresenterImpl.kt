@@ -3,6 +3,7 @@ package com.dpfht.tmdbcleanmvp.feature_movie_trailer
 import com.dpfht.tmdbcleanmvp.domain.entity.Result.Success
 import com.dpfht.tmdbcleanmvp.domain.entity.Result.Error
 import com.dpfht.tmdbcleanmvp.domain.entity.TrailerEntity
+import com.dpfht.tmdbcleanmvp.domain.usecase.GetMovieTrailerUseCase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
@@ -12,7 +13,7 @@ import java.util.Locale
 
 class MovieTrailerPresenterImpl(
   private var movieTrailerView: MovieTrailerContract.MovieTrailerView? = null,
-  private var movieTrailerModel: MovieTrailerContract.MovieTrailerModel? = null,
+  private val getMovieTrailerUseCase: GetMovieTrailerUseCase,
   private val scope: CoroutineScope
 ): MovieTrailerContract.MovieTrailerPresenter {
 
@@ -30,14 +31,12 @@ class MovieTrailerPresenterImpl(
 
   private fun getMovieTrailer() {
     scope.launch(Dispatchers.Main) {
-      movieTrailerModel?.let {
-        when (val result = it.getMovieTrailer(_movieId)) {
-          is Success -> {
-            onSuccess(result.value.results)
-          }
-          is Error -> {
-            onError(result.message)
-          }
+      when (val result = getMovieTrailerUseCase(_movieId)) {
+        is Success -> {
+          onSuccess(result.value.results)
+        }
+        is Error -> {
+          onError(result.message)
         }
       }
     }
@@ -67,6 +66,5 @@ class MovieTrailerPresenterImpl(
     }
 
     this.movieTrailerView = null
-    this.movieTrailerModel = null
   }
 }

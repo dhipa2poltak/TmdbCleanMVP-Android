@@ -5,7 +5,6 @@ import com.dpfht.tmdbcleanmvp.domain.usecase.GetMovieTrailerUseCase
 import com.dpfht.tmdbcleanmvp.domain.usecase.GetMovieTrailerUseCaseImpl
 import com.dpfht.tmdbcleanmvp.feature_movie_trailer.MovieTrailerActivity
 import com.dpfht.tmdbcleanmvp.feature_movie_trailer.MovieTrailerContract
-import com.dpfht.tmdbcleanmvp.feature_movie_trailer.MovieTrailerModelImpl
 import com.dpfht.tmdbcleanmvp.feature_movie_trailer.MovieTrailerPresenterImpl
 import com.dpfht.tmdbcleanmvp.framework.di.ActivityScope
 import dagger.Module
@@ -42,17 +41,11 @@ class MovieTrailerModule(private val movieTrailerActivity: MovieTrailerActivity)
 
   @Provides
   @ActivityScope
-  fun provideMovieTrailerModel(getMovieTrailerUseCase: GetMovieTrailerUseCase): MovieTrailerContract.MovieTrailerModel {
-    return MovieTrailerModelImpl(getMovieTrailerUseCase)
-  }
-
-  @Provides
-  @ActivityScope
   fun provideMovieTrailerPresenter(
     movieTrailerView: MovieTrailerContract.MovieTrailerView,
-    movieTrailerModel: MovieTrailerContract.MovieTrailerModel,
+    getMovieTrailerUseCase: GetMovieTrailerUseCase,
     scope: CoroutineScope
   ): MovieTrailerContract.MovieTrailerPresenter {
-    return MovieTrailerPresenterImpl(movieTrailerView, movieTrailerModel, scope)
+    return MovieTrailerPresenterImpl(movieTrailerView, getMovieTrailerUseCase, scope)
   }
 }

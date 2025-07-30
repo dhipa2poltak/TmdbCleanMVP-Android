@@ -5,7 +5,7 @@ import androidx.lifecycle.lifecycleScope
 import com.dpfht.tmdbcleanmvp.framework.di.ActivityContext
 import com.dpfht.tmdbcleanmvp.framework.di.module.FragmentModule
 import com.dpfht.tmdbcleanmvp.framework.di.FragmentScope
-import com.dpfht.tmdbcleanmvp.domain.entity.MovieEntity
+import com.dpfht.tmdbcleanmvp.domain.model.Movie
 import com.dpfht.tmdbcleanmvp.domain.repository.AppRepository
 import com.dpfht.tmdbcleanmvp.domain.usecase.GetMovieByGenreUseCase
 import com.dpfht.tmdbcleanmvp.domain.usecase.GetMovieByGenreUseCaseImpl
@@ -48,25 +48,25 @@ class MoviesByGenreModule(private val moviesByGenreFragment: MoviesByGenreFragme
 
   @Provides
   @FragmentScope
-  fun provideMovies(): ArrayList<MovieEntity> {
+  fun provideMovies(): ArrayList<Movie> {
     return arrayListOf()
   }
 
   @Provides
   @FragmentScope
   fun provideMoviesByGenrePresenter(
-    moviesByGenreView: MoviesByGenreContract.MoviesByGenreView,
-    getMovieByGenreUseCase: GetMovieByGenreUseCase,
-    movies: ArrayList<MovieEntity>,
-    scope: CoroutineScope,
-    navigationService: NavigationService
+      moviesByGenreView: MoviesByGenreContract.MoviesByGenreView,
+      getMovieByGenreUseCase: GetMovieByGenreUseCase,
+      movies: ArrayList<Movie>,
+      scope: CoroutineScope,
+      navigationService: NavigationService
   ): MoviesByGenreContract.MoviesByGenrePresenter {
     return MoviesByGenrePresenterImpl(moviesByGenreView, getMovieByGenreUseCase, movies, scope, navigationService)
   }
 
   @Provides
   @FragmentScope
-  fun provideMoviesByGenreAdapter(movies: ArrayList<MovieEntity>): MoviesByGenreAdapter {
+  fun provideMoviesByGenreAdapter(movies: ArrayList<Movie>): MoviesByGenreAdapter {
     return MoviesByGenreAdapter(movies)
   }
 }

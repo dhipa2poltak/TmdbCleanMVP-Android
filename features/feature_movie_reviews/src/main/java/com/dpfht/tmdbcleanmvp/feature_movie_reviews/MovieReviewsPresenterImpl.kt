@@ -1,8 +1,8 @@
 package com.dpfht.tmdbcleanmvp.feature_movie_reviews
 
-import com.dpfht.tmdbcleanmvp.domain.entity.Result.Success
-import com.dpfht.tmdbcleanmvp.domain.entity.Result.Error
-import com.dpfht.tmdbcleanmvp.domain.entity.ReviewEntity
+import com.dpfht.tmdbcleanmvp.domain.model.Result.Success
+import com.dpfht.tmdbcleanmvp.domain.model.Result.Error
+import com.dpfht.tmdbcleanmvp.domain.model.Review
 import com.dpfht.tmdbcleanmvp.domain.usecase.GetMovieReviewUseCase
 import com.dpfht.tmdbcleanmvp.framework.navigation.NavigationService
 import kotlinx.coroutines.CoroutineScope
@@ -12,11 +12,11 @@ import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 
 class MovieReviewsPresenterImpl(
-  private var movieReviewsView: MovieReviewsContract.MovieReviewsView? = null,
-  private val getMovieReviewUseCase: GetMovieReviewUseCase,
-  private val reviews: ArrayList<ReviewEntity>,
-  private val scope: CoroutineScope,
-  private val navigationService: NavigationService
+    private var movieReviewsView: MovieReviewsContract.MovieReviewsView? = null,
+    private val getMovieReviewUseCase: GetMovieReviewUseCase,
+    private val reviews: ArrayList<Review>,
+    private val scope: CoroutineScope,
+    private val navigationService: NavigationService
 ): MovieReviewsContract.MovieReviewsPresenter {
 
   private var _isLoadingData = false
@@ -54,7 +54,7 @@ class MovieReviewsPresenterImpl(
     }
   }
 
-  private fun onSuccess(reviews: List<ReviewEntity>, page: Int) {
+  private fun onSuccess(reviews: List<Review>, page: Int) {
     if (reviews.isNotEmpty()) {
       this.page = page
 

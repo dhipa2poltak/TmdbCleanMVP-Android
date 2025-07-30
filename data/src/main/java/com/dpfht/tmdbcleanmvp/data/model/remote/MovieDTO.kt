@@ -2,13 +2,13 @@ package com.dpfht.tmdbcleanmvp.data.model.remote
 
 import androidx.annotation.Keep
 import com.dpfht.tmdbcleanmvp.data.Constants
-import com.dpfht.tmdbcleanmvp.domain.entity.MovieEntity
+import com.dpfht.tmdbcleanmvp.domain.model.Movie
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 @Keep
 @Suppress("unused")
-data class Movie(
+data class MovieDTO(
     val adult: Boolean? = false,
 
     @SerializedName("backdrop_path")
@@ -52,8 +52,8 @@ data class Movie(
     val voteCount: Int? = -1
 )
 
-fun Movie.toDomain(): MovieEntity {
-    return MovieEntity(
+fun MovieDTO.toDomain(): Movie {
+    return Movie(
         id ?: -1,
         title ?: "",
         overview ?: "",

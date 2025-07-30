@@ -1,8 +1,8 @@
 package com.dpfht.tmdbcleanmvp.feature_movie_trailer
 
-import com.dpfht.tmdbcleanmvp.domain.entity.Result.Success
-import com.dpfht.tmdbcleanmvp.domain.entity.Result.Error
-import com.dpfht.tmdbcleanmvp.domain.entity.TrailerEntity
+import com.dpfht.tmdbcleanmvp.domain.model.Result.Success
+import com.dpfht.tmdbcleanmvp.domain.model.Result.Error
+import com.dpfht.tmdbcleanmvp.domain.model.Trailer
 import com.dpfht.tmdbcleanmvp.domain.usecase.GetMovieTrailerUseCase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -42,7 +42,7 @@ class MovieTrailerPresenterImpl(
     }
   }
 
-  private fun onSuccess(trailers: List<TrailerEntity>) {
+  private fun onSuccess(trailers: List<Trailer>) {
     var keyVideo = ""
     for (trailer in trailers) {
       if (trailer.site.lowercase(Locale.ROOT).trim() == "youtube") {

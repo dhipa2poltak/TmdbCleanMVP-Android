@@ -1,7 +1,7 @@
 package com.dpfht.tmdbcleanmvp.feature_movie_details
 
-import com.dpfht.tmdbcleanmvp.domain.entity.Result.Success
-import com.dpfht.tmdbcleanmvp.domain.entity.Result.Error
+import com.dpfht.tmdbcleanmvp.domain.model.Result.Success
+import com.dpfht.tmdbcleanmvp.domain.model.Result.Error
 import com.dpfht.tmdbcleanmvp.domain.usecase.GetMovieDetailsUseCase
 import com.dpfht.tmdbcleanmvp.framework.navigation.NavigationService
 import kotlinx.coroutines.CoroutineScope

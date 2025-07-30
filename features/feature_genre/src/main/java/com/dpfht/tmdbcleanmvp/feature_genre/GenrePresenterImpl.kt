@@ -1,8 +1,8 @@
 package com.dpfht.tmdbcleanmvp.feature_genre
 
-import com.dpfht.tmdbcleanmvp.domain.entity.GenreEntity
-import com.dpfht.tmdbcleanmvp.domain.entity.Result.Error
-import com.dpfht.tmdbcleanmvp.domain.entity.Result.Success
+import com.dpfht.tmdbcleanmvp.domain.model.Genre
+import com.dpfht.tmdbcleanmvp.domain.model.Result.Error
+import com.dpfht.tmdbcleanmvp.domain.model.Result.Success
 import com.dpfht.tmdbcleanmvp.domain.usecase.GetMovieGenreUseCase
 import com.dpfht.tmdbcleanmvp.framework.navigation.NavigationService
 import kotlinx.coroutines.CoroutineScope
@@ -12,11 +12,11 @@ import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 
 class GenrePresenterImpl(
-  private var genreView: GenreContract.GenreView? = null,
-  private val getMovieGenreUseCase: GetMovieGenreUseCase,
-  private val genres: ArrayList<GenreEntity>,
-  private val scope: CoroutineScope,
-  private val navigationService: NavigationService
+    private var genreView: GenreContract.GenreView? = null,
+    private val getMovieGenreUseCase: GetMovieGenreUseCase,
+    private val genres: ArrayList<Genre>,
+    private val scope: CoroutineScope,
+    private val navigationService: NavigationService
 ): GenreContract.GenrePresenter {
 
   override fun start() {
@@ -39,7 +39,7 @@ class GenrePresenterImpl(
     }
   }
 
-  private fun onSuccess(genres: List<GenreEntity>) {
+  private fun onSuccess(genres: List<Genre>) {
     for (genre in genres) {
       this.genres.add(genre)
       genreView?.notifyItemInserted(this.genres.size - 1)

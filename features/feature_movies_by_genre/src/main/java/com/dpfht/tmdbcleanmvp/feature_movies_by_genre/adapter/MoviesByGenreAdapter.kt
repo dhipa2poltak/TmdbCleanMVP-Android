@@ -4,11 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.dpfht.tmdbcleanmvp.domain.entity.MovieEntity
+import com.dpfht.tmdbcleanmvp.domain.model.Movie
 import com.dpfht.tmdbcleanmvp.feature_movies_by_genre.databinding.RowMovieBinding
 import com.dpfht.tmdbcleanmvp.framework.R as FrameworkR
 
-class MoviesByGenreAdapter(private val movies: ArrayList<MovieEntity>): RecyclerView.Adapter<MoviesByGenreAdapter.MovieByGenreHolder>() {
+class MoviesByGenreAdapter(private val movies: ArrayList<Movie>): RecyclerView.Adapter<MoviesByGenreAdapter.MovieByGenreHolder>() {
 
     var onClickMovieListener: OnClickMovieListener? = null
 
@@ -31,7 +31,7 @@ class MoviesByGenreAdapter(private val movies: ArrayList<MovieEntity>): Recycler
 
     class MovieByGenreHolder(private val binding: RowMovieBinding): RecyclerView.ViewHolder(binding.root) {
 
-        fun bindData(movie: MovieEntity) {
+        fun bindData(movie: Movie) {
             binding.tvTitleMovie.text = movie.title
             binding.tvOverviewMovie.text = movie.overview
 

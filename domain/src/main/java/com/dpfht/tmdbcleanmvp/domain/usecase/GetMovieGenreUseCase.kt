@@ -1,9 +1,9 @@
 package com.dpfht.tmdbcleanmvp.domain.usecase
 
-import com.dpfht.tmdbcleanmvp.domain.entity.GenreDomain
-import com.dpfht.tmdbcleanmvp.domain.entity.Result
+import com.dpfht.tmdbcleanmvp.domain.model.GenreModel
+import com.dpfht.tmdbcleanmvp.domain.model.Result
 
 interface GetMovieGenreUseCase {
 
-  suspend operator fun invoke(): Result<GenreDomain>
+  suspend operator fun invoke(): Result<GenreModel>
 }

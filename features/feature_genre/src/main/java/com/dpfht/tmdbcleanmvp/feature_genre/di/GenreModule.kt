@@ -2,7 +2,7 @@ package com.dpfht.tmdbcleanmvp.feature_genre.di
 
 import android.content.Context
 import androidx.lifecycle.lifecycleScope
-import com.dpfht.tmdbcleanmvp.domain.entity.GenreEntity
+import com.dpfht.tmdbcleanmvp.domain.model.Genre
 import com.dpfht.tmdbcleanmvp.domain.repository.AppRepository
 import com.dpfht.tmdbcleanmvp.domain.usecase.GetMovieGenreUseCase
 import com.dpfht.tmdbcleanmvp.domain.usecase.GetMovieGenreUseCaseImpl
@@ -48,25 +48,25 @@ class GenreModule(private val genreFragment: GenreFragment) {
 
   @Provides
   @FragmentScope
-  fun provideGenres(): ArrayList<GenreEntity> {
+  fun provideGenres(): ArrayList<Genre> {
     return arrayListOf()
   }
 
   @Provides
   @FragmentScope
   fun provideGenrePresenter(
-    genreView: GenreContract.GenreView,
-    getMovieGenreUseCase: GetMovieGenreUseCase,
-    genres: ArrayList<GenreEntity>,
-    scope: CoroutineScope,
-    navigationService: NavigationService
+      genreView: GenreContract.GenreView,
+      getMovieGenreUseCase: GetMovieGenreUseCase,
+      genres: ArrayList<Genre>,
+      scope: CoroutineScope,
+      navigationService: NavigationService
   ): GenreContract.GenrePresenter {
     return GenrePresenterImpl(genreView, getMovieGenreUseCase, genres, scope, navigationService)
   }
 
   @Provides
   @FragmentScope
-  fun provideGenreAdapter(genres: ArrayList<GenreEntity>): GenreAdapter {
+  fun provideGenreAdapter(genres: ArrayList<Genre>): GenreAdapter {
     return GenreAdapter(genres)
   }
 }

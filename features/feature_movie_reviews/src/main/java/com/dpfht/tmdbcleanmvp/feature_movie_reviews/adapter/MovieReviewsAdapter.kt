@@ -4,11 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.dpfht.tmdbcleanmvp.domain.entity.ReviewEntity
+import com.dpfht.tmdbcleanmvp.domain.model.Review
 import com.dpfht.tmdbcleanmvp.feature_movie_reviews.databinding.RowReviewBinding
 import com.dpfht.tmdbcleanmvp.framework.R as FrameworkR
 
-class MovieReviewsAdapter(private val reviews: ArrayList<ReviewEntity>): RecyclerView.Adapter<MovieReviewsAdapter.ReviewHolder>() {
+class MovieReviewsAdapter(private val reviews: ArrayList<Review>): RecyclerView.Adapter<MovieReviewsAdapter.ReviewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReviewHolder {
         val binding = RowReviewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -26,7 +26,7 @@ class MovieReviewsAdapter(private val reviews: ArrayList<ReviewEntity>): Recycle
 
     class ReviewHolder(private val binding: RowReviewBinding): RecyclerView.ViewHolder(binding.root) {
 
-        fun bindData(review: ReviewEntity) {
+        fun bindData(review: Review) {
             binding.tvAuthor.text = review.author
             binding.tvContent.text = review.content
 

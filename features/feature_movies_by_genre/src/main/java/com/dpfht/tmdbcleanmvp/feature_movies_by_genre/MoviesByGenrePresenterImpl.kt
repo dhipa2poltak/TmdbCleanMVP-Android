@@ -1,8 +1,8 @@
 package com.dpfht.tmdbcleanmvp.feature_movies_by_genre
 
-import com.dpfht.tmdbcleanmvp.domain.entity.MovieEntity
-import com.dpfht.tmdbcleanmvp.domain.entity.Result.Success
-import com.dpfht.tmdbcleanmvp.domain.entity.Result.Error
+import com.dpfht.tmdbcleanmvp.domain.model.Movie
+import com.dpfht.tmdbcleanmvp.domain.model.Result.Success
+import com.dpfht.tmdbcleanmvp.domain.model.Result.Error
 import com.dpfht.tmdbcleanmvp.domain.usecase.GetMovieByGenreUseCase
 import com.dpfht.tmdbcleanmvp.framework.navigation.NavigationService
 import kotlinx.coroutines.CoroutineScope
@@ -12,11 +12,11 @@ import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 
 class MoviesByGenrePresenterImpl(
-  private var moviesByGenreView: MoviesByGenreContract.MoviesByGenreView? = null,
-  private val getMovieByGenreUseCase: GetMovieByGenreUseCase,
-  private val movies: ArrayList<MovieEntity>,
-  private val scope: CoroutineScope,
-  private val navigationService: NavigationService
+    private var moviesByGenreView: MoviesByGenreContract.MoviesByGenreView? = null,
+    private val getMovieByGenreUseCase: GetMovieByGenreUseCase,
+    private val movies: ArrayList<Movie>,
+    private val scope: CoroutineScope,
+    private val navigationService: NavigationService
 ): MoviesByGenreContract.MoviesByGenrePresenter {
 
   private var _genreId = -1
@@ -54,7 +54,7 @@ class MoviesByGenrePresenterImpl(
     }
   }
 
-  private fun onSuccess(movies: List<MovieEntity>, page: Int) {
+  private fun onSuccess(movies: List<Movie>, page: Int) {
     if (movies.isNotEmpty()) {
       this.page = page
 

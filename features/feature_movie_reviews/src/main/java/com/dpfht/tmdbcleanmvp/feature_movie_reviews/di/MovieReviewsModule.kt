@@ -5,7 +5,7 @@ import androidx.lifecycle.lifecycleScope
 import com.dpfht.tmdbcleanmvp.framework.di.ActivityContext
 import com.dpfht.tmdbcleanmvp.framework.di.module.FragmentModule
 import com.dpfht.tmdbcleanmvp.framework.di.FragmentScope
-import com.dpfht.tmdbcleanmvp.domain.entity.ReviewEntity
+import com.dpfht.tmdbcleanmvp.domain.model.Review
 import com.dpfht.tmdbcleanmvp.domain.repository.AppRepository
 import com.dpfht.tmdbcleanmvp.domain.usecase.GetMovieReviewUseCase
 import com.dpfht.tmdbcleanmvp.domain.usecase.GetMovieReviewUseCaseImpl
@@ -48,25 +48,25 @@ class MovieReviewsModule(private val movieReviewsFragment: MovieReviewsFragment)
 
   @Provides
   @FragmentScope
-  fun provideReviews(): ArrayList<ReviewEntity> {
+  fun provideReviews(): ArrayList<Review> {
     return arrayListOf()
   }
 
   @Provides
   @FragmentScope
   fun provideMovieReviewsPresenter(
-    movieReviewsView: MovieReviewsContract.MovieReviewsView,
-    getMovieReviewUseCase: GetMovieReviewUseCase,
-    reviews: ArrayList<ReviewEntity>,
-    scope: CoroutineScope,
-    navigationService: NavigationService
+      movieReviewsView: MovieReviewsContract.MovieReviewsView,
+      getMovieReviewUseCase: GetMovieReviewUseCase,
+      reviews: ArrayList<Review>,
+      scope: CoroutineScope,
+      navigationService: NavigationService
   ): MovieReviewsContract.MovieReviewsPresenter {
     return MovieReviewsPresenterImpl(movieReviewsView, getMovieReviewUseCase, reviews, scope, navigationService)
   }
 
   @Provides
   @FragmentScope
-  fun provideMovieReviewsAdapter(reviews: ArrayList<ReviewEntity>): MovieReviewsAdapter {
+  fun provideMovieReviewsAdapter(reviews: ArrayList<Review>): MovieReviewsAdapter {
     return MovieReviewsAdapter(reviews)
   }
 }

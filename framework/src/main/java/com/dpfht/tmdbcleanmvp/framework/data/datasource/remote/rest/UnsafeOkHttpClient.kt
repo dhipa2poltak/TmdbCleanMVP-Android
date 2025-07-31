@@ -1,5 +1,6 @@
 package com.dpfht.tmdbcleanmvp.framework.data.datasource.remote.rest
 
+import android.content.Context
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import java.security.SecureRandom
@@ -11,7 +12,7 @@ import javax.net.ssl.X509TrustManager
 
 object UnsafeOkHttpClient {
 
-  fun getUnsafeOkHttpClient(): OkHttpClient {
+  fun getUnsafeOkHttpClient(context: Context): OkHttpClient {
     return try {
       // Create a trust manager that does not validate certificate chains
       val trustAllCerts =

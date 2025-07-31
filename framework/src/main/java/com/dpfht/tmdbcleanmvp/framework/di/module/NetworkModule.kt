@@ -1,10 +1,12 @@
 package com.dpfht.tmdbcleanmvp.framework.di.module
 
+import android.content.Context
 import com.dpfht.tmdbcleanmvp.framework.BuildConfig
 import com.dpfht.tmdbcleanmvp.framework.Config
 import com.dpfht.tmdbcleanmvp.framework.data.datasource.remote.rest.AuthInterceptor
 import com.dpfht.tmdbcleanmvp.framework.data.datasource.remote.rest.RestService
 import com.dpfht.tmdbcleanmvp.framework.data.datasource.remote.rest.UnsafeOkHttpClient
+import com.dpfht.tmdbcleanmvp.framework.di.ApplicationContext
 import dagger.Module
 import dagger.Provides
 import okhttp3.CertificatePinner
@@ -43,9 +45,9 @@ class NetworkModule {
 
   @Provides
   @Singleton
-  fun provideClient(certificatePinner: CertificatePinner): OkHttpClient {
+  fun provideClient(@ApplicationContext context: Context, certificatePinner: CertificatePinner): OkHttpClient {
     if (BuildConfig.DEBUG) {
-      return UnsafeOkHttpClient.getUnsafeOkHttpClient()
+      return UnsafeOkHttpClient.getUnsafeOkHttpClient(context)
     }
 
     val httpClientBuilder = OkHttpClient()
